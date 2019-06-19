@@ -629,7 +629,11 @@ function update_time() {
     } else {
         current_time = "morning";
         current_day++;
-        var intervalID = window.setInterval(day_change, 1000);
+        var intervalID = window.setInterval(day_change, 100);
+        function clear(id){
+            clearInterval(id)
+        }    
+        setInterval(clear(intervalID), 3000)
       
         
         //update mission board
