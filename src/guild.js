@@ -629,6 +629,9 @@ function update_time() {
     } else {
         current_time = "morning";
         current_day++;
+        var intervalID = window.setInterval(day_change, 1000);
+      
+        
         //update mission board
     }
     //for every mission assigned, updated the time stuff
@@ -649,6 +652,16 @@ function update_time() {
 
     
 }
+
+function day_change(){
+    //New day screen
+    context.fillStyle = "black";
+    context.fillRect(0, 0, 900, 650,);
+
+
+}
+
+
 function draw_characters() {
     //console.log("in draw characters");
     for (var char in roster) {
