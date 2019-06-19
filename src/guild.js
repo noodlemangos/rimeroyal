@@ -623,28 +623,23 @@ function update_time() {
 
     //first: have characters do their actions
     move_characters();
-    //next, update time.
-    if (current_time == "morning") {
-        current_time =  "evening";
-    } else {
-        current_time = "morning";
-        current_day++;
-        var intervalID = window.setInterval(day_change, 100);
-        function clear(id){
-            clearInterval(id)
-        }    
-        setInterval(clear(intervalID), 3000)
-      
-        
-        //update mission board
-    }
-    //for every mission assigned, updated the time stuff
+	//for every mission assigned, updated the time stuff. Doing this before the canvas redraw.
     for (var m in mission_board) {
         if (mission_board[m].assigned) {
             mission_board[m].decrease_time();
         }
     }
-    draw_canvas(); //redraw text.
+    //next, update time.
+    if (current_time == "morning") {
+        current_time =  "evening";
+		draw_canvas();
+    } else {
+        current_time = "morning";
+        current_day++;
+		day_change();
+		var intvID = window.setTimeout(draw_canvas, 3000);
+    }
+    //draw_canvas(); //redraw text.
     if (current_day == 7) {
         text_log.push("Whew! Looks like everyone’s still in once piece! Thanks for taking care of things while I was out. Being a Guildmaster is tough work, you did great! I’ll take over from here, but hey, when I retire for real you got a real solid shot at taking my position! See you around!");
         log_text();
@@ -659,7 +654,8 @@ function update_time() {
 
 function day_change(){
     //New day screen
-    context.fillStyle = "black";
+	//console.log("day change");
+    //black is default, don't need to specify
     context.fillRect(0, 0, 900, 650,);
 
 
