@@ -657,6 +657,7 @@ function day_change(){
 	//console.log("day change");
     //black is default, don't need to specify
     context.fillRect(0, 0, 900, 650,);
+    
 
 
 }
