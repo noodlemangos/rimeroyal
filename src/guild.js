@@ -24,7 +24,7 @@ var num_failed = 0;
 
 var canvas = document.getElementById("canv");
 var context = canvas.getContext('2d');
-context.font = "15px swap"
+context.font = "8px 'Press Start 2P'"
 //context.fillStyle = 'white';
 
 var DEFAULT_CHAR_X = 100
@@ -608,7 +608,7 @@ function draw_game_done() {
     console.log("done");
     context.drawImage(images["gamedone"], 0, 0); //draw done
     context.fillStyle = "#ffffff";
-    context.font = "24px Press Start 2P"
+    context.font = "8px 'Press Start 2P'"
     context.fillText("Missions Attempted: " + num_missions, 300, 360);
     context.fillText("Missions Succeeded: " + num_successful, 300, 400);
     context.fillText("Missions Failed: " + num_failed, 300, 440);
@@ -664,13 +664,13 @@ function day_change(){
     context.font = '68px "Press Start 2P"';
     context.fillStyle = 'white';
     context.textBaseline = 'top';
-    context.fillText  ('Day'+ current_day, 459, 325);
+    context.fillText  ('Day'+ current_day, 325, 300);
 
 }
 
 function text_fix(){
     context.fillStyle = "black"
-    context.font = "14px Press Start 2P"
+    context.font = "8px 'Press Start 2P'"
 
 
 
