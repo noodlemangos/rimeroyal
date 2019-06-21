@@ -558,11 +558,11 @@ function log_text() {
     div_log.scrollTop = div_log.scrollHeight;
 }
 function create_locations() {
-    var str_loc = new Location("Training Dummy", 380, 315, "str");
-    var mag_loc = new Location("Magic Tower", 670, 120, "mag");
-    var int_loc = new Location("Library", 570, 280, "int");
-    var aff_loc = new Location("Gazebo", 405, 135, "affinity");
-    var aff_loc2 = new Location("Gazebo", 435, 135, "affinity");
+    var str_loc = new Location("Training Dummy", 470, 300, "str");
+    var mag_loc = new Location("Magic Tower", 750, 100, "mag");
+    var int_loc = new Location("Library", 640, 280, "int");
+    var aff_loc = new Location("Gazebo", 505, 135, "affinity");
+    var aff_loc2 = new Location("Gazebo", 535, 135, "affinity");
     var start_loc = new Location("Outside", 600, 315);
     locations["start"] = start_loc;
     locations["str"] = str_loc;
