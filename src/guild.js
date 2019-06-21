@@ -24,7 +24,7 @@ var num_failed = 0;
 
 var canvas = document.getElementById("canv");
 var context = canvas.getContext('2d');
-context.font = "15px Small Fonts"
+context.font = "15px swap"
 //context.fillStyle = 'white';
 
 var DEFAULT_CHAR_X = 100
@@ -608,7 +608,7 @@ function draw_game_done() {
     console.log("done");
     context.drawImage(images["gamedone"], 0, 0); //draw done
     context.fillStyle = "#ffffff";
-    context.font = "24px Small Fonts"
+    context.font = "24px Press Start 2P"
     context.fillText("Missions Attempted: " + num_missions, 300, 360);
     context.fillText("Missions Succeeded: " + num_successful, 300, 400);
     context.fillText("Missions Failed: " + num_failed, 300, 440);
@@ -637,7 +637,8 @@ function update_time() {
         current_time = "morning";
         current_day++;
 		day_change();
-		var intvID = window.setTimeout(draw_canvas, 3000);
+        var intvID = window.setTimeout(draw_canvas, 3000);
+        text_fix();
     }
     //draw_canvas(); //redraw text.
     if (current_day == 7) {
@@ -656,12 +657,24 @@ function day_change(){
     //New day screen
 	//console.log("day change");
     //black is default, don't need to specify
+    context.fillStyle = "black"; 
     context.fillRect(0, 0, 900, 650,);
-    
+   
 
+    context.font = '68px "Press Start 2P"';
+    context.fillStyle = 'white';
+    context.textBaseline = 'top';
+    context.fillText  ('Day'+ current_day, 459, 325);
 
 }
 
+function text_fix(){
+    context.fillStyle = "black"
+    context.font = "14px Press Start 2P"
+
+
+
+}
 
 function draw_characters() {
     //console.log("in draw characters");
