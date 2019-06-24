@@ -7,7 +7,8 @@ import {
 } from "./scripting";
 //require("./scripting.ts");
 
-
+var day_screen_active = false;
+const last_day = 7
 var roster = []; //list of characters
 var mission_board = []; //list of missions
 var images = {}; //dictionary of Image objects. 
@@ -608,7 +609,7 @@ function draw_game_done() {
     console.log("done");
     context.drawImage(images["gamedone"], 0, 0); //draw done
     context.fillStyle = "#ffffff";
-    context.font = "8px 'Press Start 2P'"
+    context.font = "10px 'Press Start 2P'"
     context.fillText("Missions Attempted: " + num_missions, 300, 360);
     context.fillText("Missions Succeeded: " + num_successful, 300, 400);
     context.fillText("Missions Failed: " + num_failed, 300, 440);
@@ -630,18 +631,23 @@ function update_time() {
         }
     }
     //next, update time.
-    if (current_time == "morning") {
+    if (current_time == "morning" && current_day < last_day) {
         current_time =  "evening";
 		draw_canvas();
-    } else {
-        current_time = "morning";
+    } else   {
+        
         current_day++;
-		day_change();
-        var intvID = window.setTimeout(draw_canvas, 3000);
-        text_fix();
+        if (current_day < last_day) {
+            current_time = "morning";
+            day_change();
+            var inttvID = window.setTimeout(day_screen_active_set, 1500);
+            var intvID = window.setTimeout(draw_canvas, 1500);
+          
+            text_fix();}
+        
     }
     //draw_canvas(); //redraw text.
-    if (current_day == 7) {
+    if (current_day == last_day) {
         text_log.push("Whew! Looks like everyone’s still in once piece! Thanks for taking care of things while I was out. Being a Guildmaster is tough work, you did great! I’ll take over from here, but hey, when I retire for real you got a real solid shot at taking my position! See you around!");
         log_text();
         draw_game_done();
@@ -652,11 +658,15 @@ function update_time() {
 
     
 }
-
+function day_screen_active_set(){
+    day_screen_active = false
+}
 function day_change(){
     //New day screen
 	//console.log("day change");
     //black is default, don't need to specify
+
+    day_screen_active = true
     context.fillStyle = "black"; 
     context.fillRect(0, 0, 900, 650,);
    
@@ -665,7 +675,6 @@ function day_change(){
     context.fillStyle = 'white';
     context.textBaseline = 'top';
     context.fillText  ('Day'+ current_day, 325, 300);
-
 }
 
 function text_fix(){
@@ -790,6 +799,8 @@ function checkBounds(object, x, y) {
     return false;
 }
 function clicked(e) {
+    if (current_day == last_day) return;
+    if (day_screen_active) return;
     //only want to open popup when button is clicked.
     //close popup when popup is clicked off. 
 
