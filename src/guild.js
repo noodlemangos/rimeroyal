@@ -609,7 +609,7 @@ function draw_game_done() {
     console.log("done");
     context.drawImage(images["gamedone"], 0, 0); //draw done
     context.fillStyle = "#ffffff";
-    context.font = "10px 'Press Start 2P'"
+    context.font = "15px 'Press Start 2P'"
     context.fillText("Missions Attempted: " + num_missions, 300, 360);
     context.fillText("Missions Succeeded: " + num_successful, 300, 400);
     context.fillText("Missions Failed: " + num_failed, 300, 440);
