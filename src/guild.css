@@ -1,5 +1,26 @@
 
  @import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
 
-
+canvas {
+    position: fixed;
+    border:1px solid black;
+}
+body {
+    font-family: 'Press Start 2P';
+    font-size: 10px;
+  }
+#log {
+    height: 630px; 
+    overflow-y:auto; 
+    border:1px solid black;
+    width:385px;
+    line-height: 3;
+    position: fixed;
+        bottom:0;
+        top: 0;
+        right:0;
+    padding: 10px;
+    margin-top: 7px;
+    background-color: rgb(191, 229, 231);
+}
     
