@@ -15,12 +15,9 @@ body {
     border:1px solid black;
     width:385px;
     line-height: 3;
-    position: fixed;
-        bottom:0;
-        top: 0;
-        right:0;
+    margin-left: 912px;
+    margin-top: -10px;
     padding: 10px;
-    margin-top: 7px;
     background-color: rgb(191, 229, 231);
 }
     
