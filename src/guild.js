@@ -603,17 +603,17 @@ function draw_canvas() {
     context.drawImage(images["bg"], 0, 0); //draw bg
     draw_character_buttons();
     draw_characters();
-    context.fillText("Day " + current_day, 740, 575);
+    context.fillText("Day " + current_day, 750, 575);
     draw_time();
 }
 
 function draw_time(){
     if (current_time == "morning")
     {
-        context.drawImage(images["sun"], 740, 575);}
+        context.drawImage(images["sun"], 740, 565);}
     if (current_time == "evening")
     {
-        context.drawImage(images["moon"], 740, 575);
+        context.drawImage(images["moon"], 740, 565);
     }
 }
 function draw_game_done() {
