@@ -603,10 +603,19 @@ function draw_canvas() {
     context.drawImage(images["bg"], 0, 0); //draw bg
     draw_character_buttons();
     draw_characters();
-    context.fillText("Day " + current_day + ", " + current_time, 740, 575);
+    context.fillText("Day " + current_day, 740, 575);
+    draw_time();
 }
 
-    
+function draw_time(){
+    if (current_time == "morning")
+    {
+        context.drawImage(images["sun"], 740, 575);}
+    if (current_time == "evening")
+    {
+        context.drawImage(images["moon"], 740, 575);
+    }
+}
 function draw_game_done() {
     console.log("done");
     context.drawImage(images["gamedone"], 0, 0); //draw done
@@ -635,7 +644,7 @@ function update_time() {
     //next, update time.
     if (current_time == "morning" && current_day < last_day) {
         current_time =  "evening";
-		draw_canvas();
+        draw_canvas();
     } else   {
         
         current_day++;
