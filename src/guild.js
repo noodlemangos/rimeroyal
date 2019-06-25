@@ -447,7 +447,7 @@ class Button { //existing frameworks?
         for (var i = 1; i < words.length; i++) {
             var word = words[i];
             var w = context.measureText(currentLine + " " + word).width;
-            if (w < this.image.width - 15) {
+            if (w < this.image.width - 20) {
                 currentLine += " " + word;
             } else {
                 lines.push(currentLine);
@@ -462,7 +462,7 @@ class Button { //existing frameworks?
         var txt = this.wrap_paragraph_text("Mission:\n" + this.text);
         //console.log(txt);
         for (var l = 0; l < txt.length; l++) {
-            context.fillText(txt[l], this.x + 15, this.b_text_pos);
+            context.fillText(txt[l], this.x + 20, this.b_text_pos);
             this.b_text_pos += 20;
         }
         this.reset_text_pos();
@@ -603,7 +603,7 @@ function draw_canvas() {
     context.drawImage(images["bg"], 0, 0); //draw bg
     draw_character_buttons();
     draw_characters();
-    context.fillText("Day " + current_day + ", " + current_time, 675, 575);
+    context.fillText("Day " + current_day + ", " + current_time, 740, 575);
 }
 function draw_game_done() {
     console.log("done");
@@ -746,8 +746,6 @@ function draw_character_buttons() {
 function create_buttons() {
     pop = new Popup(300, 200, "popup");
     var y = 20;
-    var tiny_x = 310;
-    var tiny_y = 280
     for (var c in roster) {
         var char_name = roster[c].name;
         var b = new Button(10, y, char_name, char_name, char_name+"_p");
@@ -778,7 +776,7 @@ function create_buttons() {
         
 
     }
-    pass = new Button(630, 580, "pass", "pass");
+    pass = new Button(720, 580, "pass", "pass");
     ok = new Button(0,0,"ok", "ok");
 
 }
@@ -803,13 +801,15 @@ function clicked(e) {
     if (day_screen_active) return;
     //only want to open popup when button is clicked.
     //close popup when popup is clicked off. 
-
+    const rect = canvas.getBoundingClientRect()
+    const canv_x = e.clientX - rect.left
+    const canv_y = e.clientY - rect.top
     //figure out what was clicked first. 
     //console.log("moues pos: " + e.clientX + ", " + e.clientY); //debugging
     if(!pop.is_open){
         //check if a button was clicked  
         for (var button in char_buttons) {
-            if (checkBounds(char_buttons[button], e.clientX, e.clientY)) {
+            if (checkBounds(char_buttons[button], canv_x, canv_y)) {
                 //draw popup
                 char_buttons[button].pressed = true;
                 pop.is_open = true;
@@ -822,7 +822,7 @@ function clicked(e) {
             }
         }
         for (var button in mission_buttons) {
-            if (!mission_buttons[button].assigned && checkBounds(mission_buttons[button], e.clientX, e.clientY) && current_day == mission_board[button].day) {
+            if (!mission_buttons[button].assigned && checkBounds(mission_buttons[button], canv_x, canv_y) && current_day == mission_board[button].day) {
                 pop.is_open = true;
                 selected_mission = button;
                 //console.log("SETTING SELECTED MISSION");
@@ -838,18 +838,18 @@ function clicked(e) {
                 //pop.draw_popup_buttons();
             } 
         }
-        if (checkBounds(pass, e.clientX, e.clientY)) {
+        if (checkBounds(pass, canv_x, canv_y)) {
             //console.log("pass clicked");
             update_time();
         }
 
     } else {
         //if pop up is open, want to check if anything BUT buttons was clicked (for now)
-        if (checkBounds(pop, e.clientX, e.clientY)) {
+        if (checkBounds(pop, canv_x, canv_y)) {
             console.log("Popup clicked!");
             if (selected1 != null && selected2 != null) {
-                console.log(checkBounds(ok,  e.clientX, e.clientY));
-                if (checkBounds(ok,  e.clientX, e.clientY)) {
+                console.log(checkBounds(ok,  canv_x, canv_y));
+                if (checkBounds(ok,  canv_x, canv_y)) {
                     //console.log("Ok clicked");
                     pop.dismiss();
                     //selected1 = null;
@@ -860,7 +860,7 @@ function clicked(e) {
             for (var b in popup_buttons) {
                 //check if those buttons were clicked. 
                 //console.log(popup_buttons[b]);
-                if (checkBounds(popup_buttons[b], e.clientX, e.clientY)) {
+                if (checkBounds(popup_buttons[b], canv_x, canv_y)) {
                     console.log("clicked is " + popup_buttons[b].text);
                     //Select character
                     if (selected1 == null && selected_mission != null && !roster[find_in_list("roster", popup_buttons[b].text)].is_on_mission) {
