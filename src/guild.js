@@ -506,6 +506,8 @@ function preload_img() {
     images["popup"] = document.getElementById("popup");
     images["ok"] = document.getElementById("ok");
     images["gamedone"] = document.getElementById("gameover");
+    images["moon"] = document.getElementById("moon");
+    images["sun"] = document.getElementById("sun");
 }
 function create_roster() {
     roster.push(new Character("Min",{'str':7, 'mag':0, 'int': 3}, "Minspr" )); //make a dictionary/label it
@@ -603,17 +605,17 @@ function draw_canvas() {
     context.drawImage(images["bg"], 0, 0); //draw bg
     draw_character_buttons();
     draw_characters();
-    context.fillText("Day " + current_day, 750, 575);
+    context.fillText("Day " + current_day, 840, 575);
     draw_time();
 }
 
 function draw_time(){
     if (current_time == "morning")
     {
-        context.drawImage(images["sun"], 740, 565);}
+        context.drawImage(images["sun"], 840, 520);}
     if (current_time == "evening")
     {
-        context.drawImage(images["moon"], 740, 565);
+        context.drawImage(images["moon"], 840, 520);
     }
 }
 function draw_game_done() {
@@ -650,7 +652,7 @@ function update_time() {
         current_day++;
         if (current_day < last_day) {
             current_time = "morning";
-            day_change();
+            //day_change(); <--causing text sliding
             var inttvID = window.setTimeout(day_screen_active_set, 1500);
             var intvID = window.setTimeout(draw_canvas, 1500);
           
@@ -681,7 +683,6 @@ function day_change(){
     context.fillStyle = "black"; 
     context.fillRect(0, 0, 900, 650,);
    
-
     context.font = '68px "Press Start 2P"';
     context.fillStyle = 'white';
     context.textBaseline = 'top';
@@ -691,7 +692,6 @@ function day_change(){
 function text_fix(){
     context.fillStyle = "black"
     context.font = "8px 'Press Start 2P'"
-
 
 
 }
