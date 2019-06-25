@@ -47,7 +47,7 @@ var current_day = 1;
 var max_stat = 10;
 var max_affinity = 10;
 
-var text_log = ["Log:", "Thanks for coming in on such short notice! I will be away for about a week <strike>fishing</strike> on a very important errand.<br>Luckily, this can also act as your trial period! While you take over the role of guildmaster for me, your responsibilities will include assigning missions to guild members based off of how well they work together as well as their individual strengths<br>That's it, that's the only responsibility. Those who are still here will do their own thing during the day.<br>If you don't want to assign anyone on a mission during the day, that's fine too! You can just use the [NEXT] button to wait around.<br>Have fun! If the gazebo falls down again just get Landol to fix it for you, he will complain but it will be worth it."];
+var text_log = ["Log:", "Yuko!! My very old and very best friend! How’ve you been? I know you’re retired, but could you look after the ol’ guild for about a week? I gotta go <strike>fishing</strike> run a very important errand!<br>All you gotta do is assign missions to the squad based off of what they’re good at and who they work best with! We use the buddy system around here, so two people have to be assigned to each mission! If you don't want to assign anyone on a mission during the day, that's fine too! You can just use the [NEXT] button to wait around. Unassigned adventurers will just be hanging out and training at the guild hall.Have fun! Thanks in advance!<br> ~Sharro "];
 
 var selected1;
 var selected2; //for testing mission assignment.
@@ -605,6 +605,8 @@ function draw_canvas() {
     draw_characters();
     context.fillText("Day " + current_day + ", " + current_time, 740, 575);
 }
+
+    
 function draw_game_done() {
     console.log("done");
     context.drawImage(images["gamedone"], 0, 0); //draw done
