@@ -124,7 +124,9 @@ class Character {
         //context.drawImage(this.char_icon, this.x, this.y);
     }
     stats_tostr() {
-        var st = this.name + "\nStr: " + this.stats["str"] + "\nMag: " + this.stats["mag"] + "\nInt: " + this.stats["int"]+"\nStatus:";
+        var aff_st = JSON.stringify(this.affinity)
+        var st = this.name + "\nStr: " + this.stats["str"] + "\nMag: " + this.stats["mag"] + "\nInt: " + this.stats["int"]+ "\nAffinity:" + "\n" + aff_st + "\nStatus:";
+        //WIP
         if(this.is_on_mission) {
             st+=" Out on Mission";
         } else {
@@ -141,13 +143,14 @@ class Character {
     }
 }
 class Mission {
-    constructor(title, desc, req_stat, req_total, reward, win_txt, lose_txt, ticks, day) {
+    constructor(title, desc, req_stat, /*req_affinity,*/ req_total, reward, win_txt, lose_txt, ticks, day) {
         //always gain +1 affinity on success. 
         //always lose -1 affinity on failure
         //maybe add type
         this.title = title;
         this.desc = desc;
         this.req_stat = req_stat; //maybe make this an array
+        //this.req_affinity = req_affinity;//affinity
         this.req_total = req_total; //this too 
         this.reward = reward;
         this.win_txt = win_txt;
@@ -181,12 +184,19 @@ class Mission {
         console.log(this.req_stat +" of more than " + this.req_total);
         var combined_stat = roster[this.char1_i].stats[this.req_stat] + roster[this.char2_i].stats[this.req_stat];
         console.log("total points: " + combined_stat);
-        if(combined_stat >= this.req_total) { //make check function
+        //put in affinity win/lose
+        if(combined_stat >= this.req_total ) { //make check function
             //pass
             this.victory()
             return true;
 
-        } else {
+        } 
+        //else if ( 
+          //  this.affinity [this.c2] >= this.req_affinity) {
+            //this.victory()
+            //return true;
+        //}
+        else {
             this.failure()
             return false;
         }
@@ -508,6 +518,17 @@ function preload_img() {
     images["gamedone"] = document.getElementById("gameover");
     images["moon"] = document.getElementById("moon");
     images["sun"] = document.getElementById("sun");
+    images["dialogbox"] = document.getElementById("dialogbox");
+}
+function dialog(){
+    context.fillStyle = "black"; 
+    context.fillRect(0, 0, 900, 650,);
+    context.drawImage(images["dialogbox"], 0, 350);
+    context.font = '10px "Press Start 2P"';
+    context.fillStyle = 'white';
+    //this is me starting to try and make the dialog screen, I'm leaving it alone for now 
+
+
 }
 function create_roster() {
     roster.push(new Character("Min",{'str':7, 'mag':0, 'int': 3}, "Minspr" )); //make a dictionary/label it
@@ -652,7 +673,7 @@ function update_time() {
         current_day++;
         if (current_day < last_day) {
             current_time = "morning";
-            //day_change(); <--causing text sliding
+            day_change(); 
             var inttvID = window.setTimeout(day_screen_active_set, 1500);
             var intvID = window.setTimeout(draw_canvas, 1500);
           
@@ -685,8 +706,8 @@ function day_change(){
    
     context.font = '68px "Press Start 2P"';
     context.fillStyle = 'white';
-    context.textBaseline = 'top';
-    context.fillText  ('Day'+ current_day, 325, 300);
+    //context.textBaseline = 'top'; <-- caused text sliding bug
+    context.fillText  ('Day'+ current_day, 325, 350);
 }
 
 function text_fix(){
