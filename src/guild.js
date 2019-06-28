@@ -527,6 +527,9 @@ function dialog(){
     context.font = '10px "Press Start 2P"';
     context.fillStyle = 'white';
     //this is me starting to try and make the dialog screen, I'm leaving it alone for now 
+    //but i think that eventualyl setting it up in a way similar to Missions would be good 
+    //though I wonder how I'd handle avatars and such, dunno if itd be a seperate thing or a dictionary 
+    //what even is a dictionary 
 
 
 }
@@ -673,7 +676,7 @@ function update_time() {
         current_day++;
         if (current_day < last_day) {
             current_time = "morning";
-            day_change(); 
+           day_change(); 
             var inttvID = window.setTimeout(day_screen_active_set, 1500);
             var intvID = window.setTimeout(draw_canvas, 1500);
           
