@@ -322,7 +322,7 @@ class Popup {
         draw_canvas();
         //check for mission stuff in here .Make sure 2 chars selected etc
         if(selected1 != null && selected2 != null) {
-            update_time();
+            //update_time(); this is what updates time after missions are selected 
         }
         console.log("Resetting in popup dismiss");
         selected1 = null;
