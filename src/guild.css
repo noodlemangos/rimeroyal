@@ -8,6 +8,7 @@ canvas {
 body {
     font-family: 'Press Start 2P';
     font-size: 10px;
+    color: black;
   }
 #log {
     height: 630px; 
