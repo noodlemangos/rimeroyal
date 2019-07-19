@@ -134,6 +134,34 @@ class Character {
         }
         return st;
     }
+
+    display_stats1()
+    {
+            
+            var st = "Str: " + this.stats["str"] + " Mag: " + this.stats["mag"] + " Int: " + this.stats["int"];
+            //WIP
+           return st;
+        
+    }
+    display_stats2()
+    {
+        var aff_st = "Affinity:" + " "+JSON.stringify(this.affinity)
+        return aff_st
+
+    }
+
+    display_stats3()
+    {
+        var st = "Status: "
+        if(this.is_on_mission) {
+            st+=" Out on Mission";
+        } else {
+            st+=" Available"
+        }
+        return st;
+
+    }
+
     draw() {
         //console.log(this.sprite);
         context.drawImage(this.sprite, this.location.x, this.location.y);
@@ -496,6 +524,7 @@ function preload_img() {
     images["Danth"] = document.getElementById("danth");
     images["Danth_p"] = document.getElementById("danth_p");
     images["bg"] = document.getElementById("bg");
+    images["bg_evening"] = document.getElementById("bg_evening");
     images["tinyMin"] = document.getElementById("tinymin");
     images["tinyMin_p"] = document.getElementById("tinymin_p");
     images["tinyLandol"] = document.getElementById("tinylandol");
@@ -551,21 +580,21 @@ function create_missions() {
     //day 1
     mission_board.push(new Mission("An antimagic rat has taken over my attic and may be building a small nation state", "I can't get to my grandparent's old photos anymore!", "str", 5, 1, "I flexed at the rat and it left!", "The rat king rains supreme and wishes to be paid reparations via corn.", 2, 1));
     mission_board.push(new Mission("Lost cat", "Sneaky ol' fluffer escaped!", "int", 5, 1, "We found the cat behind a dumpster. The owner said that the glowing red eyes are normal..?", "What cat?", 4, 1));
-    mission_board.push(new Mission("My sheep keep on going missing", "Where are they going? What are they doing? Are they talking about me??? I have to know!", "mag", 8, 2, "They were being used by the goblins for fantasy football. They were returned, slightly more armored. ", "Sheep aren't real.", 6, 1));
+    mission_board.push(new Mission("My sheep keep on going missing", "Where are they going? What are they doing? Are they talking about me??? I have to know!", "mag", 8, 2, "They were being used by the goblins for fantasy football. They were returned, slightly more armored. ", "Sheep aren't real.", 4, 1));
     //day 2
     mission_board.push(new Mission("Slimes are eating my potatoes!", "I had one plan and that plan was whacking them with a sword and it didn't work.", "mag", 8, 2, "Slimes zapped, mission complete!", "The slimes shook off all the physical damage we could do so we shoved them into a hole and hoped for the best.", 2, 2));
-    mission_board.push(new Mission("Goblins won't stop heckling my sheep", "They're getting very stressed out! Help!", "str", 10, 3, "The sheep can sheep in peace now!", "We lost, but on the bright side I don't think sheep understand English.", 6, 2));
+    mission_board.push(new Mission("Goblins won't stop heckling my sheep", "They're getting very stressed out! Help!", "str", 10, 3, "The sheep can sheep in peace now!", "We lost, but on the bright side I don't think sheep understand English.", 4, 2));
     mission_board.push(new Mission("I think George is a vampire", "He never eats and his shirts are always stained with blood!", "int", 6, 1, "George is...a shy winery worker. We bought him new shirts.", "George moved out before we could talk to him...", 2, 2));
     //day 3
     mission_board.push(new Mission("An undead army is invading!", "THEY'VE GOTTEN INTO THE MILK BARNS! WE'RE DOOMED!", "mag", 14, 5, "win", "lose", 6, 3));
     mission_board.push(new Mission("THE SKY TURNED RED", "WHY IS IT RED???", "int", 6, 1, "It...we had to spend 3 hours explaining the sunset to a family of 6. I mean money is money but how'd this mission even get on our list.", "We stopped by and they uhhh..said a lot of words and after an hour we graciously jumped out the window to escape. ", 2, 3));
-    mission_board.push(new Mission("Lich King causing a ruckus", "Unholy magics and loud, booming noises are coming from the lich's keep, send her a warning!", "mag", 12, 4, "Our magic was cooler than hers so she agreed to move her party deeper underground", "Lich \"Partybrodudefella\" was deeply unimpressed by us and turned up her dubstep louder", 6, 3));
+    mission_board.push(new Mission("Lich King causing a ruckus", "Unholy magics and loud, booming noises are coming from the lich's keep, send her a warning!", "mag", 12, 4, "Our magic was cooler than hers so she agreed to move her party deeper underground", "Lich \"Partybrodudefella\" was deeply unimpressed by us and turned up her dubstep louder", 4, 3));
     //day 4
     mission_board.push(new Mission("A fish learned to walk on land and hes using his legs exclusively for evil", "He can't handle the responsibility of having legs! He's raising a tadpole army!", "str", 10, 3, "He got suplexed back into the ocean!", "His evil continues.....the neferious Captain Legbeard", 2, 4));
     mission_board.push(new Mission("Follow my cat aroud to see what she does all day", "I lose her every time I try, I have to know!", "int", 8, 2, "Dear god this cat gets so many treats. Please stop feeding her shes too powerful.", "Outsmarted by a cat....just another normal day honestly", 2, 4));
     mission_board.push(new Mission("Stop these weekly barfights!", "Every Wednesday an elf and an orc come to my bar, and they always end up fighting! They refuse to come on different days!", "str", 8, 2, "They started throwing chairs again so we also threw chairs at them. They were forced to team up against us and bonded over their shared defeat. Their wedding is next week, I think the problem is solved", "We couldn't stop them. I wonder if they'll still be at it when I have grandkids...", 4, 4));
     //day 5
-    mission_board.push(new Mission("Kraken won't stop rearranging the boats at the dock every night!", "We don't need our boats ordered by color! We need them where we parked them!", "mag", 12, 4, "Turns out, she just needed a translator. We set up a magical one and now the Kraken gets a salary of fish to keep track of all the boats", "Well I guess they'll just have to accept their new organizational overlord", 4, 5));
+    mission_board.push(new Mission("Kraken won't stop rearranging the boats at the dock every night!", "We don't need our boats ordered by color! We need them where we parked them!", "mag", 12, 4, "Turns out, she just needed a translator. We set up a magical one and now the Kraken gets a salary of fish to keep track of all the boats", "Well I guess they'll just have to accept their new organizational overlord", 2, 5));
     mission_board.push(new Mission("VERY LARGE BEAR! VERY VERY LARGE BEAR!!", "BEAR LARGE", "str", 10, 3, "Good news, we won! Bad news, it was a dragon.", "IT WAS NOT A BEAR!", 2, 5));
     mission_board.push(new Mission("A big rock is falling from the sky but it's probably fine", "I mean a firey death doesn't sound like the worst thing in the world", "mag", 14, 5, "We made a big bat out of magic and whacked it somewhere else!", "it was not fine!!!", 4, 5));
     //day 6
@@ -626,11 +655,18 @@ function draw_canvas() {
     context.rect(0, 0, 800, 650);
     context.stroke();
     //console.log(images["bg"]);
-    context.drawImage(images["bg"], 0, 0); //draw bg
+    if (current_time == "morning"){
+        context.drawImage(images["bg"], 0, 0);
+    }
+    if (current_time == "evening"){
+        context.drawImage(images["bg_evening"], 0, 0);
+    }
+    //context.drawImage(images["bg"], 0, 0); //draw bg
     draw_character_buttons();
     draw_characters();
     context.fillText("Day " + current_day, 840, 575);
     draw_time();
+    profile_text();
 }
 
 function draw_time(){
@@ -716,8 +752,30 @@ function day_change(){
 function text_fix(){
     context.fillStyle = "black"
     context.font = "8px 'Press Start 2P'"
-
-
+}
+function profile_text(){
+    //var s = /*'Min the Knight' + */ roster[find_in_list("roster", "Min")].display_stats()
+  //  var str = this.write_text(s);
+    context.fillText ('Min the Knight', 70, 40);
+    context.fillText (roster[find_in_list("roster", "Min")].display_stats1(), 70,60)
+    context.fillText (roster[find_in_list("roster", "Min")].display_stats2(), 70,70)
+    context.fillText (roster[find_in_list("roster", "Min")].display_stats3(), 70,80)
+    context.fillText ('Landol the Mage', 70, 130)
+    context.fillText (roster[find_in_list("roster", "Landol")].display_stats1(), 70,140)
+    context.fillText (roster[find_in_list("roster", "Landol")].display_stats2(), 70,150)
+    context.fillText (roster[find_in_list("roster", "Landol")].display_stats3(), 70,160)
+    context.fillText ('Horst the Horseman', 70, 220)
+    context.fillText (roster[find_in_list("roster", "Horst")].display_stats1(), 70,230)
+    context.fillText (roster[find_in_list("roster", "Horst")].display_stats2(), 70,240)
+    context.fillText (roster[find_in_list("roster", "Horst")].display_stats3(), 70,250)
+    context.fillText ('Rory the Summoner', 70, 310)
+    context.fillText (roster[find_in_list("roster", "Rory")].display_stats1(), 70,320)
+    context.fillText (roster[find_in_list("roster", "Rory")].display_stats2(), 70,330)
+    context.fillText (roster[find_in_list("roster", "Rory")].display_stats3(), 70,340)
+    context.fillText ('Danth the Spymaster', 70, 400)
+    context.fillText (roster[find_in_list("roster", "Danth")].display_stats1(), 70,410)
+    context.fillText (roster[find_in_list("roster", "Danth")].display_stats2(), 70,420)
+    context.fillText (roster[find_in_list("roster", "Danth")].display_stats3(), 70,430)
 }
 
 function draw_characters() {
@@ -791,9 +849,9 @@ function create_buttons() {
         //console.log(n);
         popup_buttons.push(tiny_b);
         char_buttons.push(b);
-        y+=60;
+        y+=90;
     }
-    y+=130;
+    y+=20;
     var x= 20;
     var count = 0;
     for (var c in mission_board) {
@@ -831,6 +889,8 @@ function checkBounds(object, x, y) {
     }
     return false;
 }
+
+
 function clicked(e) {
     if (current_day == last_day) return;
     if (day_screen_active) return;
