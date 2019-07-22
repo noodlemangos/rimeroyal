@@ -6,7 +6,7 @@ import {
     displayActionEffectText, areAdjacent, addUserActionTree
 } from "./scripting";
 //require("./scripting.ts");
-
+var start_screen_active = false;
 var day_screen_active = false;
 const last_day = 7
 var roster = []; //list of characters
@@ -138,15 +138,15 @@ class Character {
     display_stats1()
     {
             
-            var st = "Str: " + this.stats["str"] + " Mag: " + this.stats["mag"] + " Int: " + this.stats["int"];
+            var st = "Str:" + this.stats["str"] + " Mag:" + this.stats["mag"] + " Int:" + this.stats["int"];
             //WIP
            return st;
         
     }
     display_stats2()
     {
-        var aff_st = "Affinity:" + " "+JSON.stringify(this.affinity)
-        return aff_st
+        //var aff_st = "Affinity:" + " "+JSON.stringify(this.affinity)
+        //return aff_st
 
     }
 
@@ -731,6 +731,15 @@ function update_time() {
 
     
 }
+function start_screen(){
+    context.fillStyle = "beige";
+    context.fillRect(0,0, 900, 650);
+
+    context.font = '68px "Press Start 2P"';
+    context.fillStyle = "black"
+    context.fillText ("Rime Royale")
+
+}
 function day_screen_active_set(){
     day_screen_active = false
 }
@@ -741,7 +750,7 @@ function day_change(){
 
     day_screen_active = true
     context.fillStyle = "black"; 
-    context.fillRect(0, 0, 900, 650,);
+    context.fillRect(0, 0, 900, 650);
    
     context.font = '68px "Press Start 2P"';
     context.fillStyle = 'white';
@@ -757,25 +766,25 @@ function profile_text(){
     //var s = /*'Min the Knight' + */ roster[find_in_list("roster", "Min")].display_stats()
   //  var str = this.write_text(s);
     context.fillText ('Min the Knight', 70, 40);
-    context.fillText (roster[find_in_list("roster", "Min")].display_stats1(), 70,60)
-    context.fillText (roster[find_in_list("roster", "Min")].display_stats2(), 70,70)
-    context.fillText (roster[find_in_list("roster", "Min")].display_stats3(), 70,80)
+    context.fillText (roster[find_in_list("roster", "Min")].display_stats1(), 70,55)
+    context.fillText (roster[find_in_list("roster", "Min")].display_stats2(), 70,65)
+    context.fillText (roster[find_in_list("roster", "Min")].display_stats3(), 70,75)
     context.fillText ('Landol the Mage', 70, 130)
-    context.fillText (roster[find_in_list("roster", "Landol")].display_stats1(), 70,140)
-    context.fillText (roster[find_in_list("roster", "Landol")].display_stats2(), 70,150)
-    context.fillText (roster[find_in_list("roster", "Landol")].display_stats3(), 70,160)
+    context.fillText (roster[find_in_list("roster", "Landol")].display_stats1(), 70,145)
+    context.fillText (roster[find_in_list("roster", "Landol")].display_stats2(), 70,155)
+    context.fillText (roster[find_in_list("roster", "Landol")].display_stats3(), 70,165)
     context.fillText ('Horst the Horseman', 70, 220)
-    context.fillText (roster[find_in_list("roster", "Horst")].display_stats1(), 70,230)
-    context.fillText (roster[find_in_list("roster", "Horst")].display_stats2(), 70,240)
-    context.fillText (roster[find_in_list("roster", "Horst")].display_stats3(), 70,250)
+    context.fillText (roster[find_in_list("roster", "Horst")].display_stats1(), 70,235)
+    context.fillText (roster[find_in_list("roster", "Horst")].display_stats2(), 70,245)
+    context.fillText (roster[find_in_list("roster", "Horst")].display_stats3(), 70,255)
     context.fillText ('Rory the Summoner', 70, 310)
-    context.fillText (roster[find_in_list("roster", "Rory")].display_stats1(), 70,320)
-    context.fillText (roster[find_in_list("roster", "Rory")].display_stats2(), 70,330)
-    context.fillText (roster[find_in_list("roster", "Rory")].display_stats3(), 70,340)
+    context.fillText (roster[find_in_list("roster", "Rory")].display_stats1(), 70,325)
+    context.fillText (roster[find_in_list("roster", "Rory")].display_stats2(), 70,335)
+    context.fillText (roster[find_in_list("roster", "Rory")].display_stats3(), 70,345)
     context.fillText ('Danth the Spymaster', 70, 400)
-    context.fillText (roster[find_in_list("roster", "Danth")].display_stats1(), 70,410)
-    context.fillText (roster[find_in_list("roster", "Danth")].display_stats2(), 70,420)
-    context.fillText (roster[find_in_list("roster", "Danth")].display_stats3(), 70,430)
+    context.fillText (roster[find_in_list("roster", "Danth")].display_stats1(), 70,415)
+    context.fillText (roster[find_in_list("roster", "Danth")].display_stats2(), 70,425)
+    context.fillText (roster[find_in_list("roster", "Danth")].display_stats3(), 70,435)
 }
 
 function draw_characters() {
