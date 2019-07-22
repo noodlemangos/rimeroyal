@@ -31,7 +31,7 @@ context.font = "8px 'Press Start 2P'"
 var DEFAULT_CHAR_X = 100
 var DEFAULT_CHAR_Y = 100
 
-window.onload = function() {setup()};
+window.onload = function () { setup() };
 //events
 canvas.addEventListener("click", clicked);
 //popup
@@ -56,7 +56,7 @@ var selected_mission;
 class Character {
     constructor(name, stats, spr) {
         this.name = name;
-        this.stats = {'str':stats['str'], 'int':stats['int'], 'mag':stats['mag']}
+        this.stats = { 'str': stats['str'], 'int': stats['int'], 'mag': stats['mag'] }
         this.affinity = {};
         this.is_occupied = false;
         this.is_on_mission = false;
@@ -75,21 +75,21 @@ class Character {
         //     }
         // }
         //maybe do random eventually
-        switch(this.name) {
+        switch (this.name) {
             case "Min":
-                this.affinity = {"Landol": 1, "Horst": 5, "Rory" : 4, "Danth" : 2};
+                this.affinity = { "Landol": 1, "Horst": 5, "Rory": 4, "Danth": 2 };
                 break;
             case "Landol":
-                this.affinity = {"Min": 1, "Horst": 3, "Rory" : 2, "Danth" : 5};
+                this.affinity = { "Min": 1, "Horst": 3, "Rory": 2, "Danth": 5 };
                 break;
             case "Horst":
-                this.affinity = {"Min": 5, "Landol": 3, "Rory" : 5, "Danth" : 1};
+                this.affinity = { "Min": 5, "Landol": 3, "Rory": 5, "Danth": 1 };
                 break;
             case "Rory":
-                this.affinity = {"Min": 4, "Horst": 5, "Landol" : 2, "Danth" : 3};
+                this.affinity = { "Min": 4, "Horst": 5, "Landol": 2, "Danth": 3 };
                 break;
             case "Danth":
-                this.affinity = {"Min": 2, "Horst": 1, "Rory" : 3, "Landol" : 5};
+                this.affinity = { "Min": 2, "Horst": 1, "Rory": 3, "Landol": 5 };
         }
 
     }
@@ -125,38 +125,35 @@ class Character {
     }
     stats_tostr() {
         var aff_st = JSON.stringify(this.affinity)
-        var st = this.name + "\nStr: " + this.stats["str"] + "\nMag: " + this.stats["mag"] + "\nInt: " + this.stats["int"]+ "\nAffinity:" + "\n" + aff_st + "\nStatus:";
+        var st = this.name + "\nStr: " + this.stats["str"] + "\nMag: " + this.stats["mag"] + "\nInt: " + this.stats["int"] + "\nAffinity:" + "\n" + aff_st + "\nStatus:";
         //WIP
-        if(this.is_on_mission) {
-            st+=" Out on Mission";
+        if (this.is_on_mission) {
+            st += "Out on Mission";
         } else {
-            st+=" Available"
+            st += "Available"
         }
         return st;
     }
 
-    display_stats1()
-    {
-            
-            var st = "Str:" + this.stats["str"] + " Mag:" + this.stats["mag"] + " Int:" + this.stats["int"];
-            //WIP
-           return st;
-        
+    display_stats1() {
+
+        var st = "Str:" + this.stats["str"] + " Mag:" + this.stats["mag"] + " Int:" + this.stats["int"];
+        //WIP
+        return st;
+
     }
-    display_stats2()
-    {
+    display_stats2() {
         //var aff_st = "Affinity:" + " "+JSON.stringify(this.affinity)
         //return aff_st
 
     }
 
-    display_stats3()
-    {
+    display_stats3() {
         var st = "Status: "
-        if(this.is_on_mission) {
-            st+=" Out on Mission";
+        if (this.is_on_mission) {
+            st += "Out on Mission";
         } else {
-            st+=" Available"
+            st += "Available"
         }
         return st;
 
@@ -195,7 +192,7 @@ class Mission {
         this.difficulty = reward
     }
     assign(char1, char2) { //pass in the name.
-        this.assigned = true; 
+        this.assigned = true;
         this.c1 = char1;
         this.c2 = char2;
         this.char1_i = find_in_list("roster", this.c1);
@@ -209,20 +206,20 @@ class Mission {
         num_missions++;
         this.char1_i = find_in_list("roster", this.c1);
         this.char2_i = find_in_list("roster", this.c2);
-        console.log(this.req_stat +" of more than " + this.req_total);
+        console.log(this.req_stat + " of more than " + this.req_total);
         var combined_stat = roster[this.char1_i].stats[this.req_stat] + roster[this.char2_i].stats[this.req_stat];
         console.log("total points: " + combined_stat);
         //put in affinity win/lose
-        if(combined_stat >= this.req_total ) { //make check function
+        if (combined_stat >= this.req_total) { //make check function
             //pass
             this.victory()
             return true;
 
-        } 
+        }
         //else if ( 
-          //  this.affinity [this.c2] >= this.req_affinity) {
-            //this.victory()
-            //return true;
+        //  this.affinity [this.c2] >= this.req_affinity) {
+        //this.victory()
+        //return true;
         //}
         else {
             this.failure()
@@ -244,17 +241,17 @@ class Mission {
         roster[this.char2_i].increase_affinity(roster[this.char1_i]);
         //text_log.push(this.win_txt);
 
-        this.assigned = false; 
+        this.assigned = false;
         roster[this.char1_i].is_on_mission = false;
         roster[this.char2_i].is_on_mission = false;
         this.char1_i = null;
         this.char2_i = null;
-            
+
     }
     failure() {
         num_failed++;
         //console.log("failure");
-        text_log.push("Mission: " + this.title + " failed!<br>"+ roster[this.char1_i].name + " and " + roster[this.char2_i].name + " have returned!<br>Their statement: " + this.lose_txt);
+        text_log.push("Mission: " + this.title + " failed!<br>" + roster[this.char1_i].name + " and " + roster[this.char2_i].name + " have returned!<br>Their statement: " + this.lose_txt);
         this.char1_i = find_in_list("roster", this.c1);
         this.char2_i = find_in_list("roster", this.c2);
         //text_log.push(roster[this.char1_i].name + " and " + roster[this.char2_i].name + " have returned!<br>Their statement: " + this.lose_txt);
@@ -263,7 +260,7 @@ class Mission {
         roster[this.char2_i].decrease_affinity(roster[this.char1_i]);
         //text_log.push(this.lose_txt);
 
-        this.assigned = false; 
+        this.assigned = false;
         roster[this.char1_i].is_on_mission = false;
         roster[this.char2_i].is_on_mission = false;
         this.char1_i = null;
@@ -278,7 +275,7 @@ class Mission {
     difficulty_tostr() {
         var str = "difficulty: "
         for (var i = 0; i < this.difficulty; i++) {
-            str+= "*"
+            str += "*"
         }
         return str;
     }
@@ -295,14 +292,14 @@ class Location {
         this.name = name;
         this.x = x;
         this.y = y;
-        this.assigned = false; 
+        this.assigned = false;
         this.char1 = null;
         this.char2 = null; //for affinity ONLY
         this.stat = null;
         if (stat) {
             this.stat = stat;
         }
-        
+
     }
     assign(name, name2 = 0) {
         this.assigned = true;
@@ -317,7 +314,7 @@ class Location {
             this.char1 = name;
             roster[find_in_list("roster", this.char1)].move(this.x, this.y);
         }
-        
+
     }
     enhance() {
         if (this.stat == "affinity") {
@@ -332,7 +329,7 @@ class Location {
 }
 //useful things
 class Popup {
-    constructor (x, y, type) {
+    constructor(x, y, type) {
         this.x = x;
         this.y = y;
         this.image = images[type];
@@ -349,7 +346,7 @@ class Popup {
         this.reset();
         draw_canvas();
         //check for mission stuff in here .Make sure 2 chars selected etc
-        if(selected1 != null && selected2 != null) {
+        if (selected1 != null && selected2 != null) {
             //update_time(); this is what updates time after missions are selected 
         }
         console.log("Resetting in popup dismiss");
@@ -357,7 +354,7 @@ class Popup {
         selected2 = null;
         selected_mission = null;
         console.log("selected 2 is now " + selected2);
-        for(var b in char_buttons) {
+        for (var b in char_buttons) {
             char_buttons[b].pressed = false;
         }
         for (var x in popup_buttons) {
@@ -373,15 +370,15 @@ class Popup {
             this.text_pos += 20;
         }
         //this.text_pos = this.y + 20;
-        
+
         //this.text_x +=20;
         //this.text_y +=20;
     }
     //two below functions modified from: https://stackoverflow.com/questions/2936112/text-wrap-in-a-canvas-element
-    wrap_paragraph_text(text) { 
-        return text.split("\n").map(para => this.wrap_text(para)).reduce((a, b) => a.concat(b)); 
+    wrap_paragraph_text(text) {
+        return text.split("\n").map(para => this.wrap_text(para)).reduce((a, b) => a.concat(b));
     }
-    wrap_text(text) { 
+    wrap_text(text) {
         var words = text.split(" ");
         var lines = [];
         var currentLine = words[0];
@@ -406,12 +403,12 @@ class Popup {
         var tiny_x = 250;
         for (var b in popup_buttons) {
             var char = find_in_list("roster", popup_buttons[b].text);
-            if(!roster[char].is_on_mission) {
+            if (!roster[char].is_on_mission) {
                 if (tiny_x >= this.image.width + 100) {
                     tiny_x = 450
-                    this.text_pos+=40;
+                    this.text_pos += 40;
                 } else {
-                    tiny_x+=80;
+                    tiny_x += 80;
                 }
                 popup_buttons[b].x = tiny_x;
                 popup_buttons[b].y = this.text_pos;
@@ -419,7 +416,7 @@ class Popup {
                 popup_buttons[b].draw();
             }
         }
-    
+
     }
     draw_ok_button() {
         ok.x = 455;
@@ -428,16 +425,16 @@ class Popup {
     }
     fill_popup(text, buttons, ok) {
         this.write_text(text);
-        if(buttons) {
+        if (buttons) {
             this.draw_popup_buttons();
         }
-        if(ok) {
+        if (ok) {
             this.draw_ok_button();
         }
     }
 }
 class Button { //existing frameworks?
-    constructor (x, y, type, text, pressed_type=0) {
+    constructor(x, y, type, text, pressed_type = 0) {
         this.x = x;
         this.y = y;
         this.image = images[type];
@@ -470,14 +467,14 @@ class Button { //existing frameworks?
         } else {
             context.drawImage(this.image, this.x, this.y);
         }
-        
+
         //context.fillText(this.text, this.x + 150, this.y + 45);
     }
     //two below functions modified from: https://stackoverflow.com/questions/2936112/text-wrap-in-a-canvas-element
-    wrap_paragraph_text(text) { 
-        return text.split("\n").map(para => this.wrap_text(para)).reduce((a, b) => a.concat(b)); 
+    wrap_paragraph_text(text) {
+        return text.split("\n").map(para => this.wrap_text(para)).reduce((a, b) => a.concat(b));
     }
-    wrap_text(text) { 
+    wrap_text(text) {
         var words = text.split(" ");
         var lines = [];
         var currentLine = words[0];
@@ -549,9 +546,9 @@ function preload_img() {
     images["sun"] = document.getElementById("sun");
     images["dialogbox"] = document.getElementById("dialogbox");
 }
-function dialog(){
-    context.fillStyle = "black"; 
-    context.fillRect(0, 0, 900, 650,);
+function dialog() {
+    context.fillStyle = "black";
+    context.fillRect(0, 0, 900, 650);
     context.drawImage(images["dialogbox"], 0, 350);
     context.font = '10px "Press Start 2P"';
     context.fillStyle = 'white';
@@ -563,11 +560,11 @@ function dialog(){
 
 }
 function create_roster() {
-    roster.push(new Character("Min",{'str':7, 'mag':0, 'int': 3}, "Minspr" )); //make a dictionary/label it
-    roster.push(new Character("Landol",{'str':0, 'mag':6, 'int': 4}, "Landolspr"));
-    roster.push(new Character("Horst", {'str':8, 'mag':0, 'int': 2}, "Horstspr"));
-    roster.push(new Character("Rory", {'str':2, 'mag':6, 'int': 2}, "Roryspr"));
-    roster.push(new Character("Danth", {'str':2, 'mag':2, 'int': 6}, "Danthspr"));
+    roster.push(new Character("Min", { 'str': 7, 'mag': 0, 'int': 3 }, "Minspr")); //make a dictionary/label it
+    roster.push(new Character("Landol", { 'str': 0, 'mag': 6, 'int': 4 }, "Landolspr"));
+    roster.push(new Character("Horst", { 'str': 8, 'mag': 0, 'int': 2 }, "Horstspr"));
+    roster.push(new Character("Rory", { 'str': 2, 'mag': 6, 'int': 2 }, "Roryspr"));
+    roster.push(new Character("Danth", { 'str': 2, 'mag': 2, 'int': 6 }, "Danthspr"));
     for (var c in roster) {
         roster[c].create_affinity(); //start at 2?
         addAgent(roster[c].name); //add agent for behavior tree
@@ -609,7 +606,7 @@ function log_text() {
         lg_txt += text_log[e] + "<br> * * * <br>";
     }
     var div_log = document.getElementById("log")
-    
+
     div_log.innerHTML = lg_txt;
     div_log.scrollTop = div_log.scrollHeight;
 }
@@ -642,7 +639,7 @@ function find_in_list(type, to_search) {
             }
         }
     }
-    
+
 }
 function draw_canvas() {
     console.log("drawing canvas");
@@ -655,10 +652,10 @@ function draw_canvas() {
     context.rect(0, 0, 800, 650);
     context.stroke();
     //console.log(images["bg"]);
-    if (current_time == "morning"){
+    if (current_time == "morning") {
         context.drawImage(images["bg"], 0, 0);
     }
-    if (current_time == "evening"){
+    if (current_time == "evening") {
         context.drawImage(images["bg_evening"], 0, 0);
     }
     //context.drawImage(images["bg"], 0, 0); //draw bg
@@ -669,12 +666,11 @@ function draw_canvas() {
     profile_text();
 }
 
-function draw_time(){
-    if (current_time == "morning")
-    {
-        context.drawImage(images["sun"], 840, 520);}
-    if (current_time == "evening")
-    {
+function draw_time() {
+    if (current_time == "morning") {
+        context.drawImage(images["sun"], 840, 520);
+    }
+    if (current_time == "evening") {
         context.drawImage(images["moon"], 840, 520);
     }
 }
@@ -697,7 +693,7 @@ function update_time() {
 
     //first: have characters do their actions
     move_characters();
-	//for every mission assigned, updated the time stuff. Doing this before the canvas redraw.
+    //for every mission assigned, updated the time stuff. Doing this before the canvas redraw.
     for (var m in mission_board) {
         if (mission_board[m].assigned) {
             mission_board[m].decrease_time();
@@ -705,19 +701,20 @@ function update_time() {
     }
     //next, update time.
     if (current_time == "morning" && current_day < last_day) {
-        current_time =  "evening";
+        current_time = "evening";
         draw_canvas();
-    } else   {
-        
+    } else {
+
         current_day++;
         if (current_day < last_day) {
             current_time = "morning";
-           day_change(); 
+            day_change();
             var inttvID = window.setTimeout(day_screen_active_set, 1500);
             var intvID = window.setTimeout(draw_canvas, 1500);
-          
-            text_fix();}
-        
+
+            text_fix();
+        }
+
     }
     //draw_canvas(); //redraw text.
     if (current_day == last_day) {
@@ -729,68 +726,82 @@ function update_time() {
     }
     //characters always move
 
-    
+
 }
-function start_screen(){
+function start_screen() {
+    start_screen_active = true;
+
+
     context.fillStyle = "beige";
-    context.fillRect(0,0, 900, 650);
+    context.fillRect(0, 0, 1000, 650);
 
     context.font = '68px "Press Start 2P"';
     context.fillStyle = "black"
-    context.fillText ("Rime Royale")
+    context.fillText("Rime Royale", 100, 350);
+
+    /*var button = document.createElement("button");
+    var body = document.getElementsByTagName("body")[0];
+    body.appendChild(button);
+    button.addEventListener ("click", function() {
+        start_screen_kill();
+        draw_canvas();
+      });*/
+}
+function start_screen_kill() {
+    start_screen_active = false;
 
 }
-function day_screen_active_set(){
+function day_screen_active_set() {
     day_screen_active = false
 }
-function day_change(){
+function day_change() {
     //New day screen
-	//console.log("day change");
+    //console.log("day change");
     //black is default, don't need to specify
 
     day_screen_active = true
-    context.fillStyle = "black"; 
+    context.fillStyle = "black";
     context.fillRect(0, 0, 900, 650);
-   
+
     context.font = '68px "Press Start 2P"';
     context.fillStyle = 'white';
     //context.textBaseline = 'top'; <-- caused text sliding bug
-    context.fillText  ('Day'+ current_day, 325, 350);
+    context.fillText('Day' + current_day, 325, 350);
 }
 
-function text_fix(){
+function text_fix() {
     context.fillStyle = "black"
     context.font = "8px 'Press Start 2P'"
 }
-function profile_text(){
+function profile_text() {
     //var s = /*'Min the Knight' + */ roster[find_in_list("roster", "Min")].display_stats()
-  //  var str = this.write_text(s);
-    context.fillText ('Min the Knight', 70, 40);
-    context.fillText (roster[find_in_list("roster", "Min")].display_stats1(), 70,55)
-    context.fillText (roster[find_in_list("roster", "Min")].display_stats2(), 70,65)
-    context.fillText (roster[find_in_list("roster", "Min")].display_stats3(), 70,75)
-    context.fillText ('Landol the Mage', 70, 130)
-    context.fillText (roster[find_in_list("roster", "Landol")].display_stats1(), 70,145)
-    context.fillText (roster[find_in_list("roster", "Landol")].display_stats2(), 70,155)
-    context.fillText (roster[find_in_list("roster", "Landol")].display_stats3(), 70,165)
-    context.fillText ('Horst the Horseman', 70, 220)
-    context.fillText (roster[find_in_list("roster", "Horst")].display_stats1(), 70,235)
-    context.fillText (roster[find_in_list("roster", "Horst")].display_stats2(), 70,245)
-    context.fillText (roster[find_in_list("roster", "Horst")].display_stats3(), 70,255)
-    context.fillText ('Rory the Summoner', 70, 310)
-    context.fillText (roster[find_in_list("roster", "Rory")].display_stats1(), 70,325)
-    context.fillText (roster[find_in_list("roster", "Rory")].display_stats2(), 70,335)
-    context.fillText (roster[find_in_list("roster", "Rory")].display_stats3(), 70,345)
-    context.fillText ('Danth the Spymaster', 70, 400)
-    context.fillText (roster[find_in_list("roster", "Danth")].display_stats1(), 70,415)
-    context.fillText (roster[find_in_list("roster", "Danth")].display_stats2(), 70,425)
-    context.fillText (roster[find_in_list("roster", "Danth")].display_stats3(), 70,435)
+    //  var str = this.write_text(s);
+    context.fillText('Min the Knight', 70, 40);
+    context.fillText(roster[find_in_list("roster", "Min")].display_stats1(), 70, 55)
+    context.fillText(roster[find_in_list("roster", "Min")].display_stats2(), 70, 65)
+    context.fillText(roster[find_in_list("roster", "Min")].display_stats3(), 20, 85)
+    context.fillText('Landol the Mage', 70, 130)
+    context.fillText(roster[find_in_list("roster", "Landol")].display_stats1(), 70, 145)
+    context.fillText(roster[find_in_list("roster", "Landol")].display_stats2(), 70, 155)
+    context.fillText(roster[find_in_list("roster", "Landol")].display_stats3(), 20, 175)
+    context.fillText('Horst the Horseman', 70, 220)
+    context.fillText(roster[find_in_list("roster", "Horst")].display_stats1(), 70, 235)
+    context.fillText(roster[find_in_list("roster", "Horst")].display_stats2(), 70, 245)
+    context.fillText(roster[find_in_list("roster", "Horst")].display_stats3(), 20, 265)
+    context.fillText('Rory the Summoner', 70, 310)
+    context.fillText(roster[find_in_list("roster", "Rory")].display_stats1(), 70, 325)
+    context.fillText(roster[find_in_list("roster", "Rory")].display_stats2(), 70, 335)
+    context.fillText(roster[find_in_list("roster", "Rory")].display_stats3(), 20, 355)
+    context.fillText('Danth the Spymaster', 70, 400)
+    context.fillText(roster[find_in_list("roster", "Danth")].display_stats1(), 70, 415)
+    context.fillText(roster[find_in_list("roster", "Danth")].display_stats2(), 70, 425)
+    context.fillText(roster[find_in_list("roster", "Danth")].display_stats3(), 20, 445)
 }
 
 function draw_characters() {
     //console.log("in draw characters");
     for (var char in roster) {
-        if(!roster[char].is_on_mission) {
+        if (!roster[char].is_on_mission) {
             roster[char].draw();
         }
     }
@@ -835,33 +846,33 @@ function draw_character_buttons() {
     for (var b in mission_buttons) {
         //console.log(current_day);
         //console.log(mission_board[b].day)
-        if(current_day == mission_board[b].day && !mission_board[b].assigned) {
+        if (current_day == mission_board[b].day && !mission_board[b].assigned) {
             mission_buttons[b].draw();
             mission_buttons[b].write_text();
         }
     }
-    
+
 
     //context.drawImage(char_buttons[0].image, char_buttons[0].x, char_buttons[0].y);
-    
+
 }
 function create_buttons() {
     pop = new Popup(300, 200, "popup");
     var y = 20;
     for (var c in roster) {
         var char_name = roster[c].name;
-        var b = new Button(10, y, char_name, char_name, char_name+"_p");
-        var n = "tiny"+char_name
-        var tiny_b = new Button(0, 0, n, char_name, n+"_p");
+        var b = new Button(10, y, char_name, char_name, char_name + "_p");
+        var n = "tiny" + char_name
+        var tiny_b = new Button(0, 0, n, char_name, n + "_p");
         //console.log(images[n+"_p"]);
         //console.log(images);
         //console.log(n);
         popup_buttons.push(tiny_b);
         char_buttons.push(b);
-        y+=90;
+        y += 90;
     }
-    y+=20;
-    var x= 20;
+    y += 20;
+    var x = 20;
     var count = 0;
     for (var c in mission_board) {
         //hard coded and hacky, 3 missions per day
@@ -873,13 +884,13 @@ function create_buttons() {
         var mission_title = mission_board[c].title;
         var b = new Button(x, y, "button", mission_title);
         mission_buttons.push(b);
-        x+=220;
+        x += 220;
         count++;
-        
+
 
     }
     pass = new Button(720, 580, "pass", "pass");
-    ok = new Button(0,0,"ok", "ok");
+    ok = new Button(0, 0, "ok", "ok");
 
 }
 function checkBounds(object, x, y) {
@@ -903,6 +914,7 @@ function checkBounds(object, x, y) {
 function clicked(e) {
     if (current_day == last_day) return;
     if (day_screen_active) return;
+    if (start_screen_active) return;
     //only want to open popup when button is clicked.
     //close popup when popup is clicked off. 
     const rect = canvas.getBoundingClientRect()
@@ -910,7 +922,7 @@ function clicked(e) {
     const canv_y = e.clientY - rect.top
     //figure out what was clicked first. 
     //console.log("moues pos: " + e.clientX + ", " + e.clientY); //debugging
-    if(!pop.is_open){
+    if (!pop.is_open) {
         //check if a button was clicked  
         for (var button in char_buttons) {
             if (checkBounds(char_buttons[button], canv_x, canv_y)) {
@@ -940,7 +952,7 @@ function clicked(e) {
                 pop.fill_popup(mission_title + "\n" + mission_desc, true, false);
                 //pop.fill_popup("desc", true, false)
                 //pop.draw_popup_buttons();
-            } 
+            }
         }
         if (checkBounds(pass, canv_x, canv_y)) {
             //console.log("pass clicked");
@@ -952,8 +964,8 @@ function clicked(e) {
         if (checkBounds(pop, canv_x, canv_y)) {
             console.log("Popup clicked!");
             if (selected1 != null && selected2 != null) {
-                console.log(checkBounds(ok,  canv_x, canv_y));
-                if (checkBounds(ok,  canv_x, canv_y)) {
+                console.log(checkBounds(ok, canv_x, canv_y));
+                if (checkBounds(ok, canv_x, canv_y)) {
                     //console.log("Ok clicked");
                     pop.dismiss();
                     //selected1 = null;
@@ -995,7 +1007,7 @@ function clicked(e) {
                         pop.is_open = true;
                         pop.draw();
                         //console.log("still in if");
-                        pop.fill_popup("Sending "+ selected1 +" and "+ selected2 + " on the mission.", false, true);
+                        pop.fill_popup("Sending " + selected1 + " and " + selected2 + " on the mission.", false, true);
                         text_log.push("Sent " + selected1 + " and " + selected2 + " on: " + mission_board[selected_mission].title);
                         //selected1 = null;
                         //selected2 = null;
@@ -1003,7 +1015,7 @@ function clicked(e) {
                         //pass time
                         //update_time();
                     }
-                    
+
                 }
             }
         } else {
@@ -1020,13 +1032,17 @@ function clicked(e) {
 
 //construct popup. Maybe make it object? 
 function setup() {
-    //things to only do one time. 
+    //things to only do one time.
     preload_img();
     create_locations();
     create_roster();
     create_missions();
     create_buttons();
-    draw_canvas();
+    //start_screen();
+    draw_canvas(); //get rid of this when reenable start screen
+    //var intttvID = window.setTimeout(start_screen_kill, 1500);
+    //var intttttvID = window.setTimeout(draw_canvas, 1500);
+    //text_fix();
 
 }
 //villanelle stuff
@@ -1050,7 +1066,7 @@ function get_random_char_list() {
 function select_action(c) {
     //switch statement
     console.log(c.name + " selecting action...");
-    switch(c.name) {
+    switch (c.name) {
         case "Min":
             return selector([get_character_train_str(c), get_character_raise_affinity(c), get_character_train_int(c), get_character_train_mag(c)]);
         case "Landol":
@@ -1072,9 +1088,9 @@ function get_char_to_raise_affinity(c) {
         //console.log(c);
         //console.log(roster[ch]);
         var comp = roster[ch];
-        if(comp.name != c.name) {
-            if(!comp.is_occupied) {
-                if(c.affinity[comp.name] < 10 && c.affinity[comp.name] >= highest_aff) {
+        if (comp.name != c.name) {
+            if (!comp.is_occupied) {
+                if (c.affinity[comp.name] < 10 && c.affinity[comp.name] >= highest_aff) {
                     highest = comp;
                     highest_aff = c.affinity[comp.name];
                 }
@@ -1086,32 +1102,32 @@ function get_char_to_raise_affinity(c) {
 }
 //CHECK SPOT DEC
 function get_character_train_str(c) {
-    let train_str = action( 
-    () => !locations["str"].assigned && c.stats["str"] < 10 && !c.is_occupied && !c.is_on_mission,
-    () => {
-            text_log.push(c.name +" is training str.");
+    let train_str = action(
+        () => !locations["str"].assigned && c.stats["str"] < 10 && !c.is_occupied && !c.is_on_mission,
+        () => {
+            text_log.push(c.name + " is training str.");
             console.log(locations["str"].assigned);
             locations["str"].assigned = true;
-            c.is_occupied = true; 
+            c.is_occupied = true;
             //increase stat
             c.increase_stat("str", 1);
             //set c's location
             c.set_location("str");
-            
+
         }, 0
     )
-    
+
     return train_str;
 }
 function get_character_train_int(c) {
     //console.log("int loc: " + int_cond);
-    let train_int = action( 
-    () => !locations["int"].assigned && c.stats["int"] < 10 && !c.is_occupied && !c.is_on_mission,
-    () => {
-            text_log.push(c.name +" is training int.");
+    let train_int = action(
+        () => !locations["int"].assigned && c.stats["int"] < 10 && !c.is_occupied && !c.is_on_mission,
+        () => {
+            text_log.push(c.name + " is training int.");
             //set location assigned
             locations["int"].assigned = true;
-            c.is_occupied = true; 
+            c.is_occupied = true;
             //increase stat
             c.increase_stat("int", 1);
             //set c's location
@@ -1122,14 +1138,14 @@ function get_character_train_int(c) {
 }
 function get_character_train_mag(c) {
     //var mag_cond = !locations["mag"].assigned && c.stats['mag'] < 10 && !c.is_occupied;
-    let train_mag = action( 
-    () => !locations["mag"].assigned && c.stats["mag"] < 10 && !c.is_occupied && !c.is_on_mission,
-    () => { 
+    let train_mag = action(
+        () => !locations["mag"].assigned && c.stats["mag"] < 10 && !c.is_occupied && !c.is_on_mission,
+        () => {
             //console.log(mag_cond);    
-            text_log.push(c.name +" is training mag.");
+            text_log.push(c.name + " is training mag.");
             //set location assigned
             locations["mag"].assigned = true;
-            c.is_occupied = true; 
+            c.is_occupied = true;
             //increase stat
             c.increase_stat("mag", 1);
             //set c's location
@@ -1144,20 +1160,21 @@ function get_character_raise_affinity(c) {
     let raise_affinity = action(
         () => !locations["affinity1"].assigned && !locations["affinity2"].assigned && !c.is_occupied,
         () => {
-                var c2 = get_char_to_raise_affinity(c); //this is character obj. Should be unoccupied w less than 10 aff
-                text_log.push(c.name +" is raising affinity with " + c2.name + ".");
-                //set location assigned
-                locations["affinity1"].assigned = true;
-                locations["affinity2"].assigned = true;
-                //increase affinity with them
-                c.increase_affinity(c2.name);
-                c2.increase_affinity(c.name);
-                //set both to occupied
-                c.is_occupied = true;
-                c2.is_occupied = true;
-                //set both' location
-                c.set_location("affinity1");
-                c2.set_location("affinity2");
+            var c2 = get_char_to_raise_affinity(c); //this is character obj. Should be unoccupied w less than 10 aff
+            text_log.push(c.name + " is raising affinity with " + c2.name + ".");
+            //set location assigned
+            locations["affinity1"].assigned = true;
+            locations["affinity2"].assigned = true;
+            //increase affinity with them
+            c.increase_affinity(c2.name);
+            c2.increase_affinity(c.name);
+
+            //set both to occupied
+            c.is_occupied = true;
+            c2.is_occupied = true;
+            //set both' location
+            c.set_location("affinity1");
+            c2.set_location("affinity2");
         }, 0
     )
     return raise_affinity;
