@@ -10,6 +10,7 @@ body {
     font-size: 10px;
     color: black;
   }
+
 #log {
     height: 630px; 
     overflow-y:auto; 
@@ -21,4 +22,3 @@ body {
     padding: 10px;
     background-color: rgb(191, 229, 231);
 }
-    
