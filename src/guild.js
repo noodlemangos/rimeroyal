@@ -8,7 +8,7 @@ import {
 //require("./scripting.ts");
 var start_screen_active = false;
 var day_screen_active = false;
-const last_day = 7
+const last_day = 12
 var roster = []; //list of characters
 var mission_board = []; //list of missions
 var images = {}; //dictionary of Image objects. 
@@ -598,6 +598,13 @@ function create_missions() {
     mission_board.push(new Mission("Someone's stolen the town flag!", "We need our flag!", "int", 8, 2, "We found it in a shopping cart 10 miles away", "We couldn't find it so we replaced the flag with a coat someone left out?", 2, 6));
     mission_board.push(new Mission("Golem rampaging through town!", "IT'S DESTROYING THE FLOWERS AND ONLY THE FLOWERS!!", "str", 12, 4, "We hacked it! With an axe. But somehow this fixed it and now its a normal gardening golem!", "It beat us up and ran into the countryside to castrate more plants", 2, 6));
     mission_board.push(new Mission("A tiny dragon won't get out of my silverwear cabinet!", "Now normally this wouldn't be an issue but our house is very flammable!", "int", 10, 3, "Lil guy just wants to hoard spoons. We made him a pile of donated spoons out in the woods and he seems very happy!", "Well the dragon's out of the cabinet, but their house is...slightly....ablaze.", 2, 6));
+    //day 7 
+    mission_board.push(new Mission("Where's my mail!", "Mailman won't deliver my mail! Somethin' about 'Work hazards', whatever those are.", "str",8, 2, " Her old mailbox was actually just a bear trap with some paper in it, so we built her a new mailbox! One that definetly isn't a repurposed bucket", "Her..house is too on fire for us to find the mailbox", 2, 7 ));
+    mission_board.push(new Mission("My baby has glowing eyes..", "She's otherwise normal.. but we're worried about her parents being killed for character development", "mag", 12, 4,"We taught her parents how to cast magic! As long as they don't decide to go on a journey and die in a war, it should be fine" ,"Sometimes babies' eyes just glow, it's normal! My eyes glowed when I was a kid", 3, 7));
+    mission_board.push(new Mission("Where's Sharro?", "It's been a week, they should've come back by now...", "int", 1, 1, "djOfnLkghDjfnd FslRjkIgEfljNnDfkd dkjsfgnkjghBasdEfhg WjkEl;LjhkgjLhfds", "this outcome is numerically impossible, what have you done now Yuko.", 1, 7));
+    //day 8
+    mission_board.push(new Mission())
+
 
 }
 function log_text() {
@@ -777,24 +784,24 @@ function profile_text() {
     //var s = /*'Min the Knight' + */ roster[find_in_list("roster", "Min")].display_stats()
     //  var str = this.write_text(s);
     context.fillText('Min the Knight', 70, 40);
-    context.fillText(roster[find_in_list("roster", "Min")].display_stats1(), 70, 55)
-    context.fillText(roster[find_in_list("roster", "Min")].display_stats2(), 70, 65)
+    context.fillText(roster[find_in_list("roster", "Min")].display_stats1(), 70, 65)
+    //context.fillText(roster[find_in_list("roster", "Min")].display_stats2(), 70, 65)
     context.fillText(roster[find_in_list("roster", "Min")].display_stats3(), 20, 85)
     context.fillText('Landol the Mage', 70, 130)
-    context.fillText(roster[find_in_list("roster", "Landol")].display_stats1(), 70, 145)
-    context.fillText(roster[find_in_list("roster", "Landol")].display_stats2(), 70, 155)
+    context.fillText(roster[find_in_list("roster", "Landol")].display_stats1(), 70, 155)
+    //context.fillText(roster[find_in_list("roster", "Landol")].display_stats2(), 70, 155)
     context.fillText(roster[find_in_list("roster", "Landol")].display_stats3(), 20, 175)
     context.fillText('Horst the Horseman', 70, 220)
-    context.fillText(roster[find_in_list("roster", "Horst")].display_stats1(), 70, 235)
-    context.fillText(roster[find_in_list("roster", "Horst")].display_stats2(), 70, 245)
+    context.fillText(roster[find_in_list("roster", "Horst")].display_stats1(), 70, 245)
+    //context.fillText(roster[find_in_list("roster", "Horst")].display_stats2(), 70, 245)
     context.fillText(roster[find_in_list("roster", "Horst")].display_stats3(), 20, 265)
     context.fillText('Rory the Summoner', 70, 310)
-    context.fillText(roster[find_in_list("roster", "Rory")].display_stats1(), 70, 325)
-    context.fillText(roster[find_in_list("roster", "Rory")].display_stats2(), 70, 335)
+    context.fillText(roster[find_in_list("roster", "Rory")].display_stats1(), 70, 335)
+    //context.fillText(roster[find_in_list("roster", "Rory")].display_stats2(), 70, 335)
     context.fillText(roster[find_in_list("roster", "Rory")].display_stats3(), 20, 355)
     context.fillText('Danth the Spymaster', 70, 400)
-    context.fillText(roster[find_in_list("roster", "Danth")].display_stats1(), 70, 415)
-    context.fillText(roster[find_in_list("roster", "Danth")].display_stats2(), 70, 425)
+    context.fillText(roster[find_in_list("roster", "Danth")].display_stats1(), 70, 425)
+    //context.fillText(roster[find_in_list("roster", "Danth")].display_stats2(), 70, 425)
     context.fillText(roster[find_in_list("roster", "Danth")].display_stats3(), 20, 445)
 }
 
@@ -1038,11 +1045,11 @@ function setup() {
     create_roster();
     create_missions();
     create_buttons();
-    //start_screen();
-    draw_canvas(); //get rid of this when reenable start screen
-    //var intttvID = window.setTimeout(start_screen_kill, 1500);
-    //var intttttvID = window.setTimeout(draw_canvas, 1500);
-    //text_fix();
+    start_screen();
+    //draw_canvas(); //get rid of this when reenable start screen
+    var intttvID = window.setTimeout(start_screen_kill, 1500);
+    var intttttvID = window.setTimeout(draw_canvas, 1500);
+    text_fix();
 
 }
 //villanelle stuff
