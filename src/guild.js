@@ -8,7 +8,7 @@ import {
 //require("./scripting.ts");
 var start_screen_active = false;
 var day_screen_active = false;
-const last_day = 12
+const last_day = 15
 var roster = []; //list of characters
 var mission_board = []; //list of missions
 var images = {}; //dictionary of Image objects. 
@@ -615,8 +615,14 @@ function create_missions() {
     mission_board.push(new Mission("sNEdVbEjRbgENkjDnING sCkAhfLbAMskItTrsY", "gUsNdvOgBsSfERvVsED adWhEsbg CgEkjAfShEgdfs sakThdOfkf fEkXjIgShTkdg", "int", 100, 10, "It's all falling apart now", "dfIjnjSkds dTksHjaEfnRdjEnf djkAfaskjfgf fLdIjkgFfEjhg fBdEYjgOsND fdjTgnHdEjsfng sdkEgjNfnDgfjkd?", 2, 10));
     mission_board.push(new Mission("sNnEVbEjRbEdNkjDIoNG sCkAhLbAMskItTrYjdf", "gUsNdvOgBsSfERvVsED adWhEsbg CgEkjAfShEgdfs sakThdOfkf fEkXjIgShTkdg", "int", 100, 10, "It's all falling apart now", "dfIjnjSkds dTksHjaEfnRdjEnf djkAfaskjfgf fLdIjkgFfEjhg fBdEYjgOsND fdjTgnHdEjsfng sdkEgjNfnDgfjkd?", 2, 10));
     //day 11
-    mission_board.push (new Mission(""))
+    mission_board.push (new Mission("I can't open this jar!", "I will pay you one entire chicken if you help me open this jar", "str", 6, 1, "There was a.. demon in that jar but hey we got it open!", "We couldn't open it so we smashed it and a demon came out?", 2, 11))
+    mission_board.push(new Mission("A dragon burnt down my farms!", "She's got a flamethrower!!", "mag", 12, 4, "We stole the flamethrower and she ran off", "turns out, punching a flamethrower just makes it explode and set more things on fire..", 2, 11));
+    mission_board.push(new Mission("A plague has killed my village", "We need to stop it!", "int", 14, 5, "He wanted us to kill him to stop the plague, but we cleaned up the watter supply instead. Should be fine now!", "We couldn't figure out the cause so we just walled off the place. I'm sure that'll never get discovered by a morally grey necromancer later!", 2, 11));
+    //day 12
+    mission_board.push(new Mission())
+    //day 13
 
+    //day 14
 }
 function log_text() {
     var lg_txt = "";
