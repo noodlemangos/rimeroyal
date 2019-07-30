@@ -627,9 +627,9 @@ function create_missions() {
     mission_board.push (new Mission("Destroy The Compiler", "...", "mag", 20, 6, "gAoGoJdbKye", ".....", 2, 13));
     mission_board.push (new Mission("Destroy The Compiler", "...", "int", 20, 6, "HyuSkDo", "......", 2, 13));
     //day 14
-    mission_board.push(new Mission ("Yuko The Hero", "Stoic, perhaps to a fault. An aggresively uninteresting person, perhaps thats why she became you.", "str", 1, 20, "a friend", "a brick wall of a friend", 10, 14));
-    mission_board.push(new Mission("Sharro The Mentor", "Larger than life, too large to fit in this story. They are proud of you. Wherever they are..", "mag",1,20, "good ol NB buddy", "fluffy", 10,14));
-    mission_board.push(new Mission("Avinus The Compiler", "A world made of stories needs a storyteller. And yet an end had to come.", "int", 1, 6, "writers block ended the world basically", "twas a silly plot, but I had fun", 20, 14));
+    mission_board.push(new Mission ("Yuko The Hero", "Stoic, perhaps to a fault. An aggresively uninteresting person, perhaps thats why she became you.", "str", 1, 3, "a friend", "a brick wall of a friend", 10, 14));
+    mission_board.push(new Mission("Sharro The Mentor", "Larger than life, too large to fit in this story. They are proud of you. Wherever they are..", "mag",1,3, "good ol NB buddy", "fluffy", 10,14));
+    mission_board.push(new Mission("Avinus The Compiler", "A world made of stories needs a storyteller. And yet an end had to come.", "int", 1, 3, "writers block ended the world basically", "twas a silly plot, but I had fun", 20, 14));
 }
 function log_text() {
     var lg_txt = "";
@@ -749,7 +749,7 @@ function update_time() {
     }
     //draw_canvas(); //redraw text.
     if (current_day == last_day) {
-        text_log.push("Whew! Looks like everyone’s still in once piece! Thanks for taking care of things while I was out. Being a Guildmaster is tough work, you did great! I’ll take over from here, but hey, when I retire for real you got a real solid shot at taking my position! See you around!");
+        text_log.push("You did a good job Yuko");
         log_text();
         draw_game_done();
     } else {
