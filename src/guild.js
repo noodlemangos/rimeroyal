@@ -1197,8 +1197,8 @@ function get_character_raise_affinity(c) {
             locations["affinity1"].assigned = true;
             locations["affinity2"].assigned = true;
             //increase affinity with them
-            c.increase_affinity(c2.name);
-            c2.increase_affinity(c.name);
+            c.increase_affinity(c2);
+            c2.increase_affinity(c);
 
             //set both to occupied
             c.is_occupied = true;
