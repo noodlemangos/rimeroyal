@@ -47,7 +47,7 @@ var current_day = 1;
 var max_stat = 10;
 var max_affinity = 10;
 
-var text_log = ["Log:", "Yuko!! My very old and very best friend! How’ve you been? I know you’re retired, but could you look after the ol’ guild for about a week? I gotta go <strike>fishing</strike> run a very important errand!<br>All you gotta do is assign missions to the squad based off of what they’re good at and who they work best with! We use the buddy system around here, so two people have to be assigned to each mission! If you don't want to assign anyone on a mission during the day, that's fine too! You can just use the [NEXT] button to wait around. Unassigned adventurers will just be hanging out and training at the guild hall.Have fun! Thanks in advance!<br> ~Sharro "];
+var text_log = ["Log:", "Yuko!! My very old and very best friend! How’ve you been? I know you’re retired, but could you look after the ol’ guild for about a week? I gotta go run a very important errand! All you got to do is assign missions based off of what’s needed [STRENGTH, MAGIC, or INTELLIGENCE]! We use the buddy system around here, so two people have to be assigned to each mission, check who gets along with who by clicking on their profiles! After that, you can just use the [NEXT] button to move on with the day. Unassigned adventurers will just be hanging out and training at the guild hall. Have fun! Thanks in advance!<br> ~Sharro "];
 
 var selected1;
 var selected2; //for testing mission assignment.
@@ -545,6 +545,7 @@ function preload_img() {
     images["moon"] = document.getElementById("moon");
     images["sun"] = document.getElementById("sun");
     images["dialogbox"] = document.getElementById("dialogbox");
+    images["startscreen"] = document.getElementById("startscreen")
 }
 function dialog() {
     context.fillStyle = "black";
@@ -623,9 +624,9 @@ function create_missions() {
     mission_board.push(new Mission("Thfe castle is being invaded by a small child!", "She's got disrespect for authority and the laws of physics!", "str",12, 4,"thE LAWS OF PHYSICS MEAN NOTHING TO MY PECS ~Probably Min", "I think she accidentally deleted herself??", 2, 12 ));
     mission_board.push(new Mission("dYsOdUf dCANTf gShAjVhE kTlHrEeM aAsLdL", "WsdEfg fNgEED hCjOdNFLICT dWhEsf NhEfEgD sEjYfEdSg", "int", 100, 10, "You can't be here", "WaHsY dDfO YgOhU dDfENgY fMEd", 1, 12));
     //day 13
-    mission_board.push(new Mission("Destroy The Compiler", "...", "str", 20, 6, "tShDaFnk yFJoGuH", "....", 2, 13));
-    mission_board.push (new Mission("Destroy The Compiler", "...", "mag", 20, 6, "gAoGoJdbKye", ".....", 2, 13));
-    mission_board.push (new Mission("Destroy The Compiler", "...", "int", 20, 6, "HyuSkDo", "......", 2, 13));
+    mission_board.push(new Mission("DEgSTRuOY THaE COMPhILER", "...", "str", 20, 6, "tShDaFnk yFJoGuH", "....", 2, 13));
+    mission_board.push (new Mission("sDESTROdY TeHE COkMPILER", "...", "mag", 20, 6, "gAoGoJdbKye", ".....", 2, 13));
+    mission_board.push (new Mission("DESTgROY ToHE COMrPILrER", "...", "int", 20, 6, "HyuSkDo", "......", 2, 13));
     //day 14
     mission_board.push(new Mission ("Yuko The Hero", "Stoic, perhaps to a fault. An aggresively uninteresting person, perhaps thats why she became you.", "str", 1, 3, "a friend", "a brick wall of a friend", 10, 14));
     mission_board.push(new Mission("Sharro The Mentor", "Larger than life, too large to fit in this story. They are proud of you. Wherever they are..", "mag",1,3, "good ol NB buddy", "fluffy", 10,14));
@@ -763,12 +764,11 @@ function start_screen() {
     start_screen_active = true;
 
 
-    context.fillStyle = "beige";
-    context.fillRect(0, 0, 1000, 650);
+    context.drawImage(images["startscreen"], 0, 0);
 
-    context.font = '68px "Press Start 2P"';
-    context.fillStyle = "black"
-    context.fillText("Rime Royale", 100, 350);
+   // context.font = '68px "Press Start 2P"';
+    ///context.fillStyle = "black"
+    //context.fillText("Rime Royale", 100, 350);
 
     /*var button = document.createElement("button");
     var body = document.getElementsByTagName("body")[0];
