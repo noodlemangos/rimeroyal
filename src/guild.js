@@ -229,7 +229,7 @@ class Mission {
     victory() {
         //console.log("success");
         num_successful++;
-        text_log.push("Mission: " + this.title + " was successful!<br>" + roster[this.char1_i].name + " and " + roster[this.char2_i].name + " have returned!<br>Their statement: " + this.win_txt);
+        text_log.push("Mission: " + this.title + '<span style="color: #228B22"> was successful!<br></span>' + roster[this.char1_i].name + " and " + roster[this.char2_i].name + " have returned!<br>Their statement: " + this.win_txt);
         this.char1_i = find_in_list("roster", this.c1);
         this.char2_i = find_in_list("roster", this.c2);
         //text_log.push(roster[this.char1_i].name + " and " + roster[this.char2_i].name + " have returned!<br>Their statement: " + this.win_txt);
@@ -251,7 +251,7 @@ class Mission {
     failure() {
         num_failed++;
         //console.log("failure");
-        text_log.push("Mission: " + this.title + " failed!<br>" + roster[this.char1_i].name + " and " + roster[this.char2_i].name + " have returned!<br>Their statement: " + this.lose_txt);
+        text_log.push("Mission: " + this.title + '<span style="color: #ff0000"> failed!<br></span>' + roster[this.char1_i].name + " and " + roster[this.char2_i].name + " have returned!<br>Their statement: " + this.lose_txt);
         this.char1_i = find_in_list("roster", this.c1);
         this.char2_i = find_in_list("roster", this.c2);
         //text_log.push(roster[this.char1_i].name + " and " + roster[this.char2_i].name + " have returned!<br>Their statement: " + this.lose_txt);
