@@ -61,6 +61,7 @@ class Character {
         this.is_occupied = false;
         this.is_on_mission = false;
         this.location = locations["start"];
+        this.profile 
         //console.log(this.location);
         //this.x = DEFAULT_CHAR_X;
         //this.y = DEFAULT_CHAR_Y;
@@ -78,18 +79,23 @@ class Character {
         switch (this.name) {
             case "Min":
                 this.affinity = { "Landol": 1, "Horst": 5, "Rory": 4, "Danth": 2 };
+                this.profile = "An excellent young woman! Very good taste in armor. Spends her spare time deadlifting Horst's horse and complaining about Landol's potions. Hates grapes."
                 break;
             case "Landol":
                 this.affinity = { "Min": 1, "Horst": 3, "Rory": 2, "Danth": 5 };
+                this.profile = "My nephew! He always wanted to be a transmuter like Avinus, but he ended up being better at Alchemy and blasty magic. Flavors his potions with grape juice and gossips with Danth for fun"
                 break;
             case "Horst":
                 this.affinity = { "Min": 5, "Landol": 3, "Rory": 5, "Danth": 1 };
+                this.profile = "Gets along with everyone! Including his demon horse. Horst's natural friendliness and his horse's unsettling stare give them a net 0 charisma."
                 break;
             case "Rory":
                 this.affinity = { "Min": 4, "Horst": 5, "Landol": 2, "Danth": 3 };
+                this.profile = "She just showed up at our doorstep one day and now she's a part of the adventuring family! She's a very talented summoner. Likes to make scarves for her summons"
                 break;
             case "Danth":
                 this.affinity = { "Min": 2, "Horst": 1, "Rory": 3, "Landol": 5 };
+                this.profile = "Always knows things before anyone else does somehow. Don't say anything you don't want everyone else knowing around him...or in general. He could be anywhere. He could be writing this right now."
         }
 
     }
@@ -125,7 +131,7 @@ class Character {
     }
     stats_tostr() {
         var aff_st = JSON.stringify(this.affinity)
-        var st = this.name + "\nStr: " + this.stats["str"] + "\nMag: " + this.stats["mag"] + "\nInt: " + this.stats["int"] + "\nAffinity:" + "\n" + aff_st + "\nStatus:";
+        var st = this.name + "\nSharro's Notes: " + this.profile +/*"\nStr: " + this.stats["str"] + "\nMag: " + this.stats["mag"] + "\nInt: " + this.stats["int"] +*/ "\nAffinity:" + "\n" + aff_st + "\nStatus:";
         //WIP
         if (this.is_on_mission) {
             st += "Out on Mission";
@@ -133,6 +139,10 @@ class Character {
             st += "Available"
         }
         return st;
+    }
+    profile_description(){
+        var st = this.name + "\n" + this.profile
+
     }
 
     display_stats1() {
