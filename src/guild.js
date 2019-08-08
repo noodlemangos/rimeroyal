@@ -555,7 +555,8 @@ function preload_img() {
     images["moon"] = document.getElementById("moon");
     images["sun"] = document.getElementById("sun");
     images["dialogbox"] = document.getElementById("dialogbox");
-    images["startscreen"] = document.getElementById("startscreen")
+    images["startscreen"] = document.getElementById("startscreen");
+    images["restart"] = document.getElementById("restart");
 }
 function dialog() {
     context.fillStyle = "black";
