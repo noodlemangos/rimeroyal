@@ -41,6 +41,7 @@ var pass;
 //ok button
 var ok;
 //tick: 7 days total. 2 ticks per day (morn/eve). Even ticks are morning = new day
+var reset;
 var current_time = "morning";
 var current_day = 1;
 
@@ -600,7 +601,7 @@ function create_missions() {
     mission_board.push(new Mission("Lich King causing a ruckus", "Unholy magics and loud, booming noises are coming from the lich's keep, send her a warning!", "mag", 12, 4, "Our magic was cooler than hers so she agreed to move her party deeper underground", "Lich \"Partybrodudefella\" was deeply unimpressed by us and turned up her dubstep louder", 2, 3));
     //day 4
     mission_board.push(new Mission("A fish learned to walk on land and hes using his legs exclusively for evil", "He can't handle the responsibility of having legs! He's raising a tadpole army!", "str", 10, 3, "He got suplexed back into the ocean!", "His evil continues.....the neferious Captain Legbeard", 2, 4));
-    mission_board.push(new Mission("Follow my cat aroud to see what she does all day", "I lose her every time I try, I have to know!", "int", 8, 2, "Dear god this cat gets so many treats. Please stop feeding her shes too powerful.", "Outsmarted by a cat....just another normal day honestly", 2, 4));
+    mission_board.push(new Mission("Follow my cat around to see what she does all day", "I lose her every time I try, I have to know!", "int", 8, 2, "Dear god this cat gets so many treats. Please stop feeding her shes too powerful.", "Outsmarted by a cat....just another normal day honestly", 2, 4));
     mission_board.push(new Mission("Stop these weekly barfights!", "Every Wednesday an elf and an orc come to my bar, and they always end up fighting! They refuse to come on different days!", "str", 8, 2, "They started throwing chairs again so we also threw chairs at them. They were forced to team up against us and bonded over their shared defeat. Their wedding is next week, I think the problem is solved", "We couldn't stop them. I wonder if they'll still be at it when I have grandkids...", 2, 4));
     //day 5
     mission_board.push(new Mission("Kraken won't stop rearranging the boats at the dock every night!", "We don't need our boats ordered by color! We need them where we parked them!", "mag", 12, 4, "Turns out, she just needed a translator. We set up a magical one and now the Kraken gets a salary of fish to keep track of all the boats", "Well I guess they'll just have to accept their new organizational overlord", 2, 5));
@@ -762,7 +763,8 @@ function update_time() {
     }
     //draw_canvas(); //redraw text.
     if (current_day == last_day) {
-        text_log.push("You did a good job Yuko");
+        //text_log.push("You did a good job Yuko");
+        win_lose();
         log_text();
         draw_game_done();
     } else {
@@ -772,6 +774,16 @@ function update_time() {
 
 
 }
+function win_lose(){
+    if (num_successful > 14){
+        text_log.push("You did a good job Yuko");
+    }
+    else {
+        text_log.push("aSsfgEbnEej dYsjfOUhjasg jOdNsfns sTdHfjdEs")
+    }
+
+}
+
 function start_screen() {
     start_screen_active = true;
 
