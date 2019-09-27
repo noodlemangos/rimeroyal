@@ -21,6 +21,7 @@ var num_missions = 0;
 var num_successful = 0;
 var num_failed = 0;
 
+var req_affinity = 7 //affinity required to win a mission with affinity and half the required stat total
 //https://imgur.com/a/jnQ80q9 button source
 
 var canvas = document.getElementById("canv");
@@ -69,7 +70,7 @@ class Character {
         this.sprite = images[spr];
         //this.char_icon = char_icons[name];
     }
-    create_affinity() {
+    create_char_info() {
         // for (var char in roster) {
         //     //console.log();
         //     if (roster[char].name != this.name) {
@@ -131,7 +132,8 @@ class Character {
         //context.drawImage(this.char_icon, this.x, this.y);
     }
     stats_tostr() {
-        var aff_st = JSON.stringify(this.affinity)
+        //var aff_st = JSON.stringify(this.affinity)
+        var aff_st = this.affinity_tostr();
         var st = this.name + "\nSharro's Notes: " + this.description +/*"\nStr: " + this.stats["str"] + "\nMag: " + this.stats["mag"] + "\nInt: " + this.stats["int"] +*/ "\nAffinity:" + "\n" + aff_st + "\nStatus:";
         //WIP
         if (this.is_on_mission) {
@@ -141,25 +143,13 @@ class Character {
         }
         return st;
     }
-    //profile_description(){
-        //var st = this.name + "\n" + this.description
 
-    //} I do not remember why this is here
-
-    display_stats1() {
-
+    display_stats() {
         var st = "Str:" + this.stats["str"] + " Mag:" + this.stats["mag"] + " Int:" + this.stats["int"];
         //WIP
         return st;
-
     }
-    display_stats2() {
-        //var aff_st = "Affinity:" + " "+JSON.stringify(this.affinity)
-        //return aff_st
-
-    }
-
-    display_stats3() {
+    display_status() {
         var st = "Status: "
         if (this.is_on_mission) {
             st += "Out on Mission";
@@ -169,7 +159,23 @@ class Character {
         return st;
 
     }
-
+    affinity_tostr() {
+        var affinity_string = "";
+        console.log(Object.keys(this.affinity).length);
+        //c.affinity[comp.name]
+        var count = 0 //for edge case comma 
+        for (var character in this.affinity) {
+            console.log(character + " " + this.affinity[character]);
+            affinity_string += character + ": " + this.affinity[character];
+            if(count != 3) { //hard coded with character amount for now
+                affinity_string +=  ", "
+            }
+            count++;
+        }
+        //get characters affinity chart
+        //add each character and value to the string
+        return affinity_string;
+    }
     draw() {
         //console.log(this.sprite);
         context.drawImage(this.sprite, this.location.x, this.location.y);
@@ -219,19 +225,20 @@ class Mission {
         this.char2_i = find_in_list("roster", this.c2);
         console.log(this.req_stat + " of more than " + this.req_total);
         var combined_stat = roster[this.char1_i].stats[this.req_stat] + roster[this.char2_i].stats[this.req_stat];
+        var character_affinity = roster[this.char1_i].affinity[roster[this.char2_i].name];
+        console.log(character_affinity);
         console.log("total points: " + combined_stat);
-        //put in affinity win/lose
+
+        //if (combined_stat >= this.req_total / 2)
+        //standard requirement
         if (combined_stat >= this.req_total) { //make check function
             //pass
             this.victory()
             return true;
-
+        } else if (character_affinity >= req_affinity && combined_stat >= this.req_total/2) { //check for affinity win second
+            this.victory()
+            return true;
         }
-        //else if ( 
-        //  this.affinity [this.c2] >= this.req_affinity) {
-        //this.victory()
-        //return true;
-        //}
         else {
             this.failure()
             return false;
@@ -579,7 +586,7 @@ function create_roster() {
     roster.push(new Character("Rory", { 'str': 2, 'mag': 6, 'int': 2 }, "Roryspr"));
     roster.push(new Character("Danth", { 'str': 2, 'mag': 2, 'int': 6 }, "Danthspr"));
     for (var c in roster) {
-        roster[c].create_affinity(); //start at 2?
+        roster[c].create_char_info(); //start at 2?
         addAgent(roster[c].name); //add agent for behavior tree
         //console.log(roster[c]);
     }
@@ -832,25 +839,25 @@ function profile_text() {
     //var s = /*'Min the Knight' + */ roster[find_in_list("roster", "Min")].display_stats()
     //  var str = this.write_text(s);
     context.fillText('Min the Knight', 70, 40);
-    context.fillText(roster[find_in_list("roster", "Min")].display_stats1(), 70, 65)
+    context.fillText(roster[find_in_list("roster", "Min")].display_stats(), 70, 65)
     //context.fillText(roster[find_in_list("roster", "Min")].display_stats2(), 70, 65)
-    context.fillText(roster[find_in_list("roster", "Min")].display_stats3(), 20, 85)
+    context.fillText(roster[find_in_list("roster", "Min")].display_status(), 20, 85)
     context.fillText('Landol the Mage', 70, 130)
-    context.fillText(roster[find_in_list("roster", "Landol")].display_stats1(), 70, 155)
+    context.fillText(roster[find_in_list("roster", "Landol")].display_stats(), 70, 155)
     //context.fillText(roster[find_in_list("roster", "Landol")].display_stats2(), 70, 155)
-    context.fillText(roster[find_in_list("roster", "Landol")].display_stats3(), 20, 175)
+    context.fillText(roster[find_in_list("roster", "Landol")].display_status(), 20, 175)
     context.fillText('Horst the Horseman', 70, 220)
-    context.fillText(roster[find_in_list("roster", "Horst")].display_stats1(), 70, 245)
+    context.fillText(roster[find_in_list("roster", "Horst")].display_stats(), 70, 245)
     //context.fillText(roster[find_in_list("roster", "Horst")].display_stats2(), 70, 245)
-    context.fillText(roster[find_in_list("roster", "Horst")].display_stats3(), 20, 265)
+    context.fillText(roster[find_in_list("roster", "Horst")].display_status(), 20, 265)
     context.fillText('Rory the Summoner', 70, 310)
-    context.fillText(roster[find_in_list("roster", "Rory")].display_stats1(), 70, 335)
+    context.fillText(roster[find_in_list("roster", "Rory")].display_stats(), 70, 335)
     //context.fillText(roster[find_in_list("roster", "Rory")].display_stats2(), 70, 335)
-    context.fillText(roster[find_in_list("roster", "Rory")].display_stats3(), 20, 355)
+    context.fillText(roster[find_in_list("roster", "Rory")].display_status(), 20, 355)
     context.fillText('Danth the Spymaster', 70, 400)
-    context.fillText(roster[find_in_list("roster", "Danth")].display_stats1(), 70, 425)
+    context.fillText(roster[find_in_list("roster", "Danth")].display_stats(), 70, 425)
     //context.fillText(roster[find_in_list("roster", "Danth")].display_stats2(), 70, 425)
-    context.fillText(roster[find_in_list("roster", "Danth")].display_stats3(), 20, 445)
+    context.fillText(roster[find_in_list("roster", "Danth")].display_status(), 20, 445)
 }
 
 function draw_characters() {
